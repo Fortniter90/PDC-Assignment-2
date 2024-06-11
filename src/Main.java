@@ -30,16 +30,17 @@ public class Main {
         
         
         Items it1 = new Items("pep1", 20.16, "Weird", 10, loc1);
-        //loc.addLocation(loc1);
-       // it.addItem(it1);
+        loc.addLocation(loc1);
+        it.addItem(it1);
         
+        it.updateQuantity(it1, 20);
        // loc.browseLocations();
-       // Locations locc2 = loc.loadLocation("Location2");
-        
-       Locations locc3 = loc.loadLocation("Location3");
+        Locations locc2 = loc.loadLocation("Peppe Palaece");
+       loc.browseLocations(); 
+    //   Locations locc3 = loc.loadLocation("Location3");
    //   loc.deleteLocation(locc2);
-     // loc.deleteLocation(locc3);
-      //  loc.browseLocations();
+   //    loc.deleteLocation(locc3);
+       loc.browseLocations();
        
         it.browseItems();
        
@@ -50,7 +51,7 @@ public class Main {
        // it.searchItemByQuantity(10);
       // it.searchItemByCategory("Weird");
       
-      //
+      
      
         
         HibernateUtil.shutdown();

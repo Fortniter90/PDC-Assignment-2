@@ -1,8 +1,5 @@
 ----------------------------------------------------------------
-Tue Jun 11 22:29:57 NZST 2024:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585): instance a816c00e-0190-06d8-eb23-00000edc9000 
-on database directory C:\Users\Ethan\Documents\NetBeansProjects\PDC-Assignment-2\igetit5 with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@30946e09 
-Loaded from file:/C:/Users/Ethan/Documents/NetBeansProjects/PDC-Assignment-2/lib/Derby/derby.jar
+Tue Jun 11 23:32:24 NZST 2024D001 : [0] The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585), [1] a816c00e-0190-0712-163b-00000f421ab8, [2] C:\Users\Ethan\Documents\NetBeansProjects\PDC-Assignment-2\igetit5, [3] jdk.internal.loader.ClassLoaders$AppClassLoader@18ef96, [4] file:/C:/Users/Ethan/Documents/NetBeansProjects/PDC-Assignment-2/lib/Derby/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=11.0.22+9-LTS-219
 user.dir=C:\Users\Ethan\Documents\NetBeansProjects\PDC-Assignment-2
@@ -10,4 +7,4 @@ os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
-Database Class Loader started - derby.database.classpath=''
+C005 : [0] 

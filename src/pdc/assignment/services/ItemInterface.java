@@ -21,7 +21,7 @@ public interface ItemInterface {
     
     public boolean deleteItem(Items item);
     
-    public boolean updateQuantity(Items item);
+    public boolean updateQuantity(Items item, int amount);
     
     public List<Items> searchItemByName(String name);
     

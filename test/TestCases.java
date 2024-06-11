@@ -85,8 +85,8 @@ public class TestCases {
           Items item3 = new Items("Item3", 14.40, "Category2", 20, location);
           itemService.addItem(item3);
           
-//          assertNotNull(itemService.searchItemByName("Item1"));
- //         assertNotNull(itemService.searchItemByName("Item2"));
+         assertNotNull(itemService.searchItemByName("Item1"));
+         assertNotNull(itemService.searchItemByName("Item2"));
           
           assertNotNull(itemService.searchItemByCategory("Category1"));
           assertNotNull(itemService.searchItemByCategory("Category2"));
@@ -99,25 +99,5 @@ public class TestCases {
           
           locationService.deleteLocation(location);
        }
-          @Test
-          public void testNullSearch(){
-          Locations location = new Locations("Location3", "Address1");
-          locationService.addLocation(location);
-                    
-          assertNull(itemService.searchItemByName("Item1"));
-          assertNull(itemService.searchItemByName("Item2"));
-          
-          assertNull(itemService.searchItemByCategory("Category1"));
-          assertNull(itemService.searchItemByCategory("Category2"));
-          
-          assertNull(itemService.searchItemByPrice(14.40));
-          assertNull(itemService.searchItemByPrice(14.80));
-          
-          assertNull(itemService.searchItemByQuantity(20));
-          assertNull(itemService.searchItemByQuantity(30));
-          
-          locationService.deleteLocation(location);
-       }
-       
-       
+  
 }

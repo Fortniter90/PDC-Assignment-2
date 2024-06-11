@@ -98,8 +98,29 @@ public class ItemManagement extends BaseLog implements ItemInterface {
     }
 
     @Override
-    public boolean updateQuantity(Items item) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean updateQuantity(Items item, int amount) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = null;
+        boolean status = false;
+        try {
+            transaction = session.beginTransaction();
+            Items loadedItems = (Items) session.get(Items.class, item.getId());
+            if (loadedItems != null) {
+                loadedItems.setQuantity(amount);
+                session.update(loadedItems);
+                transaction.commit();
+                status = true;
+            } else {
+                transaction.rollback();
+            }
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            logger.info("ERROR Occurs in ItemManagement - deleteItem!");
+            e.printStackTrace();
+        }
+        return status;
     }
 
     @Override
