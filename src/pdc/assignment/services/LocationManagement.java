@@ -38,7 +38,7 @@ public class LocationManagement extends BaseLog implements LocationInterface {
             if (transaction != null) {
                 transaction.rollback();
             }
-            logger.info("ERROR Occurs in ItemManagement - addItem!");
+            logger.info("ERROR Occurs in LocationMangement - addLocation!");
             e.printStackTrace();
         }
         return status;
@@ -62,7 +62,7 @@ public class LocationManagement extends BaseLog implements LocationInterface {
             if (transaction != null) {
                 transaction.rollback();
             }
-            logger.info("ERROR Occurs in ItemManagement - addItem!");
+            logger.info("ERROR Occurs in LocationMangement - browseLocations!");
             e.printStackTrace();
         }
         return locations;
@@ -93,7 +93,7 @@ public class LocationManagement extends BaseLog implements LocationInterface {
             if (transaction != null) {
                 transaction.rollback();
             }
-            logger.info("ERROR Occurs in ItemManagement - addItem!");
+            logger.info("ERROR Occurs in LocationMangement - deleteLocation!");
             e.printStackTrace();
         }
         return status;
@@ -119,7 +119,7 @@ public class LocationManagement extends BaseLog implements LocationInterface {
             if (transaction != null) {
                 transaction.rollback();
             }
-            logger.info("ERROR Occurs in ItemManagement - addItem!");
+            logger.info("ERROR Occurs in LocationMangement - loadLocation!");
             e.printStackTrace();
         }
         return locationName;

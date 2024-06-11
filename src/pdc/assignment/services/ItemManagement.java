@@ -66,7 +66,7 @@ public class ItemManagement extends BaseLog implements ItemInterface {
             if (transaction != null) {
                 transaction.rollback();
             }
-            logger.info("ERROR Occurs in ItemManagement - addItem!");
+            logger.info("ERROR Occurs in ItemManagement - browseItems!");
             e.printStackTrace();
         }
         return items;
@@ -91,7 +91,7 @@ public class ItemManagement extends BaseLog implements ItemInterface {
             if (transaction != null) {
                 transaction.rollback();
             }
-            logger.info("ERROR Occurs in ItemManagement - addItem!");
+            logger.info("ERROR Occurs in ItemManagement - deleteItem!");
             e.printStackTrace();
         }
         return status;
@@ -125,7 +125,7 @@ public class ItemManagement extends BaseLog implements ItemInterface {
             if (transaction != null) {
                 transaction.rollback();
             }
-            logger.info("ERROR Occurs in ItemManagement - addItem!");
+            logger.info("ERROR Occurs in ItemManagement - searchItemByName!");
             e.printStackTrace();
         }
         return null;
@@ -154,7 +154,7 @@ Session session = HibernateUtil.getSession();
             if (transaction != null) {
                 transaction.rollback();
             }
-            logger.info("ERROR Occurs in ItemManagement - addItem!");
+            logger.info("ERROR Occurs in ItemManagement - searchItemByQuantity!");
             e.printStackTrace();
         }
         return null;
@@ -183,7 +183,7 @@ Session session = HibernateUtil.getSession();
             if (transaction != null) {
                 transaction.rollback();
             }
-            logger.info("ERROR Occurs in ItemManagement - addItem!");
+            logger.info("ERROR Occurs in ItemManagement - searchItemByCategory!");
             e.printStackTrace();
         }
         return null;
@@ -212,7 +212,7 @@ Session session = HibernateUtil.getSession();
             if (transaction != null) {
                 transaction.rollback();
             }
-            logger.info("ERROR Occurs in ItemManagement - addItem!");
+            logger.info("ERROR Occurs in ItemManagement - searchItemByPrice!");
             e.printStackTrace();
         }
         return null;
@@ -237,7 +237,7 @@ Session session = HibernateUtil.getSession();
             if (transaction != null) {
                 transaction.rollback();
             }
-            logger.info("ERROR Occurs in ItemManagement - addItem!");
+            logger.info("ERROR Occurs in ItemManagement - itemLoad!");
             e.printStackTrace();
         }
         return itemName;
