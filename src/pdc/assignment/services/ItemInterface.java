@@ -19,7 +19,7 @@ public interface ItemInterface {
     
     public Items itemLoad(String item);
     
-    public boolean deleteItem(String item);
+    public boolean deleteItem(Items item);
     
     public boolean updateQuantity(Items item);
     
@@ -30,8 +30,5 @@ public interface ItemInterface {
     public List<Items> searchItemByCategory(String category);
     
     public List<Items> searchItemByPrice(double price);
-
-    public List<Items> searchItemByLocation(String location);
-
 
 }

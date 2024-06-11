@@ -69,18 +69,25 @@ public class LocationManagement extends BaseLog implements LocationInterface {
     }
 
     @Override
-    public boolean deleteLocation(String location) {
+    public boolean deleteLocation(Locations location) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = null;
         boolean status = false;
-        Locations locationName;
         try {
             transaction = session.beginTransaction();
-            locationName = (Locations) session.load(Locations.class, location);
-            if (locationName != null) {
-                session.delete(locationName);
-                transaction.commit();
-                status = true;
+            Locations loadedLocation = (Locations) session.get(Locations.class, location.getId());
+            if (loadedLocation != null) {
+            // Delete all items that reference this location
+            Query deleteItemsQuery = session.createQuery("DELETE FROM Items WHERE location.id = :locationId");
+            deleteItemsQuery.setParameter("locationId", loadedLocation.getId());
+            deleteItemsQuery.executeUpdate();
+            
+            // Now delete the location
+            session.delete(loadedLocation);
+            transaction.commit();
+            status = true;
+            } else {
+                transaction.rollback();
             }
         } catch (Exception e) {
             if (transaction != null) {

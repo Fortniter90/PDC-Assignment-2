@@ -24,9 +24,9 @@ public class GUI extends JFrame {
         setLayout(new BorderLayout());
 
         JPanel buttonPanel = new JPanel();
-        JButton loadButton = new JButton("Load Image");
-        JButton cleanButton = new JButton("Clean Noise");
-        JButton saveButton = new JButton("Save Image");
+        JButton loadButton = new JButton("Add");
+        JButton cleanButton = new JButton("Delete");
+        JButton saveButton = new JButton("Select");
 
         buttonPanel.add(loadButton);
         buttonPanel.add(cleanButton);

@@ -30,12 +30,28 @@ public class Main {
         
         
         Items it1 = new Items("pep1", 20.16, "Weird", 10, loc1);
+        //loc.addLocation(loc1);
+       // it.addItem(it1);
         
-        loc.browseLocations();
+       // loc.browseLocations();
+       // Locations locc2 = loc.loadLocation("Location2");
         
-     
-        
+       Locations locc3 = loc.loadLocation("Location3");
+   //   loc.deleteLocation(locc2);
+     // loc.deleteLocation(locc3);
+      //  loc.browseLocations();
+       
         it.browseItems();
+       
+       
+        
+   // it.searchItemByName("pep1");
+   // it.searchItemByPrice(20.16);
+       // it.searchItemByQuantity(10);
+      // it.searchItemByCategory("Weird");
+      
+      //
+     
         
         HibernateUtil.shutdown();
         

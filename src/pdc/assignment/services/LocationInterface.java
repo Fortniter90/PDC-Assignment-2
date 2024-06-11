@@ -19,5 +19,5 @@ public interface LocationInterface {
     
     public Locations loadLocation(String location);
     
-    public boolean deleteLocation(String location);    
+    public boolean deleteLocation(Locations location);    
 }

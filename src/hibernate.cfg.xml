@@ -4,7 +4,7 @@
 <hibernate-configuration>
     <session-factory>
          <property name="dialect">org.hibernate.dialect.DerbyTenSevenDialect</property>
-        <property name="hibernate.connection.url">jdbc:derby:igetit2;create=true</property>
+        <property name="hibernate.connection.url">jdbc:derby:igetit5;create=true</property>
         <property name="hibernate.connection.username">ass</property>
         <property name="hibernate.connection.password">ass</property>
         <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</property>
