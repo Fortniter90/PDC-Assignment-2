@@ -8,11 +8,14 @@ import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import pdc.assignment.model.Items;
+import pdc.assignment.model.Locations;
+import pdc.assignment.services.ItemInterface;
 import pdc.assignment.services.ItemManagement;
 
 /**
@@ -22,15 +25,18 @@ import pdc.assignment.services.ItemManagement;
 public class RemoveItem extends javax.swing.JPanel {
 
     private JFrame parentFrame;
-    private ItemManagement itemManagement;
+    private final Locations location;
+
     /**
      * Creates new form RemoveItem
+     *
+     * @param location
      */
-    public RemoveItem(JFrame parentFrame) {
+    public RemoveItem(Locations location, JFrame parentFrame) {
+        this.location = location;
         this.parentFrame = parentFrame;
-        this.itemManagement = new ItemManagement();
         initComponents();
-        
+
         parentFrame.setMinimumSize(new Dimension(850, 690));
         // Add a ComponentListener to limit resizing
         parentFrame.addComponentListener(new ComponentAdapter() {
@@ -43,9 +49,20 @@ public class RemoveItem extends javax.swing.JPanel {
                 }
             }
         });
-        
-        
+        loadItems();
     }
+    
+     private void loadItems() {
+         ItemInterface it = new ItemManagement();
+        //populate removeItemsDropdown
+        List<Items> items = it.browseItemsByLocation(location);
+        if (items != null) {
+            for (Items item : items) {
+                removeItemDropdown.addItem(item.getName());
+            }
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -144,15 +161,16 @@ public class RemoveItem extends javax.swing.JPanel {
 
     private void removeItemDropdownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeItemDropdownActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_removeItemDropdownActionPerformed
 
     private void removeItemBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeItemBackActionPerformed
         // TODO add your handling code here:
-      
+
         JFrame itemPanelFrame = new JFrame("Item Panel");
         itemPanelFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         itemPanelFrame.setSize(850, 690);
-        itemPanelFrame.add(new ItemPanel(itemPanelFrame));
+        itemPanelFrame.add(new ItemPanel(location, itemPanelFrame));
         itemPanelFrame.setLocationRelativeTo(null); //center the frame
         itemPanelFrame.setVisible(true);
 
@@ -161,36 +179,31 @@ public class RemoveItem extends javax.swing.JPanel {
 
     private void removeItemConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeItemConfirmActionPerformed
         // TODO add your handling code here:
-            // Get the selected item name from the dropdown menu
-            String itemName = (String) removeItemDropdown.getSelectedItem();
+        String itemName = (String) removeItemDropdown.getSelectedItem();
+        ItemInterface it = new ItemManagement();
+        Items removedItem = it.itemLoad(itemName, location);
+        if (location != null) {
+                    boolean removalSuccessful = it.deleteItem(removedItem); // Call a method to remove the item
 
-            // Get the quantity to remove from the text field
-            String quantityStr = removeItemQuantity.getText();
-            if (!quantityStr.isEmpty()) {
-                try {
-                    int quantityToRemove = Integer.parseInt(quantityStr);
-
-                    // Call removeItemByName method from ItemManagement
-                    boolean removed = itemManagement.removeItemByName(itemName, quantityToRemove);
-
-                    if (removed) {
-                        JOptionPane.showMessageDialog(this, "Quantity removed successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    if (removalSuccessful) {
+                        // Show a success message
+                        JOptionPane.showMessageDialog(this, "Item removed successfully!");
                     } else {
-                        JOptionPane.showMessageDialog(this, "Failed to remove quantity.", "Error", JOptionPane.ERROR_MESSAGE);
+                        // Show a failure message
+                        JOptionPane.showMessageDialog(this, "Failed to remove Item. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(this, "Invalid quantity input.", "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    // Show an error message if no item is selected
+                    JOptionPane.showMessageDialog(this, "Please select an item to remove.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Please enter a quantity to remove.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            
     }//GEN-LAST:event_removeItemConfirmActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
         int confirmed = JOptionPane.showConfirmDialog(null,
-            "Are you sure you want to exit the program?", "Exit Program",
-            JOptionPane.YES_NO_OPTION);
+                "Are you sure you want to exit the program?", "Exit Program",
+                JOptionPane.YES_NO_OPTION);
 
         if (confirmed == JOptionPane.YES_OPTION) {
             //perform any cleanup or saving operations if needed
@@ -198,6 +211,7 @@ public class RemoveItem extends javax.swing.JPanel {
             //close the main window or exit the application
             Window window = SwingUtilities.getWindowAncestor(this);
             window.dispose(); //closes
+            System.exit(0);
         }
     }//GEN-LAST:event_exitActionPerformed
 

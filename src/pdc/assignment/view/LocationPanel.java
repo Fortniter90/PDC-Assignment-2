@@ -233,9 +233,9 @@ public class LocationPanel extends javax.swing.JPanel {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         parentFrame.dispose(); //close panel
-
+        
         }else{
-        JOptionPane.showMessageDialog(this, "Please Select A Location", "Fail", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Please Select A Location", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_selectLocationActionPerformed
 

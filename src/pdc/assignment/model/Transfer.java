@@ -118,4 +118,9 @@ public class Transfer implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+    
+    @Override
+    public String toString(){
+        return "Transfered Item: " + getItem() + "Source Location: " + getSourceLocation() + "Destination Location: " + getDestLocation() + "Amount Transfered: " + getQuantity();
+    }
 }

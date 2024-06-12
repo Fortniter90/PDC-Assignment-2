@@ -169,6 +169,7 @@ public class DisplayItems extends javax.swing.JPanel {
             //close the main window or exit the application
             Window window = SwingUtilities.getWindowAncestor(this);
             window.dispose(); //closes
+            System.exit(0);
         }
     }//GEN-LAST:event_exitActionPerformed
 

@@ -221,7 +221,7 @@ public class ItemPanel extends javax.swing.JPanel {
         JFrame transferItemFrame = new JFrame("Transfer an item");
         transferItemFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         transferItemFrame.setSize(850, 690);
-        transferItemFrame.add(new TransferItem(transferItemFrame));
+        transferItemFrame.add(new TransferItem(location,transferItemFrame));
         transferItemFrame.setLocationRelativeTo(null); //center the frame
         transferItemFrame.setVisible(true);      
           
@@ -266,6 +266,7 @@ public class ItemPanel extends javax.swing.JPanel {
             //close the main window or exit the application
             Window window = SwingUtilities.getWindowAncestor(this);
             window.dispose(); //closes 
+            System.exit(0);
         }
     }//GEN-LAST:event_exitActionPerformed
 
@@ -288,7 +289,7 @@ public class ItemPanel extends javax.swing.JPanel {
         JFrame displayTransfersFrame = new JFrame("Search for an item");
         displayTransfersFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         displayTransfersFrame.setSize(850, 690);
-        displayTransfersFrame.add(new DisplayTransfers(displayTransfersFrame));
+        displayTransfersFrame.add(new DisplayTransfers(location,displayTransfersFrame));
         displayTransfersFrame.setLocationRelativeTo(null); //center the frame
         displayTransfersFrame.setVisible(true);      
           

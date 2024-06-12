@@ -180,7 +180,7 @@ public class AddItems extends javax.swing.JPanel {
             newItem.setLocation(location);
             newItem.setName(addItemName.getText());
             newItem.setQuantity(Integer.parseInt(addItemQuantity.getText())); //assuming quantity is an integer
-            newItem.setPrice(Double.parseDouble(addItemPrice.getText())); //assuming price is a double
+            newItem .setPrice(Double.parseDouble(addItemPrice.getText())); //assuming price is a double
 
             ItemManagement itemManagement = new ItemManagement(); //adjust this as per your class structure
 
@@ -216,6 +216,7 @@ public class AddItems extends javax.swing.JPanel {
             //close the main window or exit the application
             Window window = SwingUtilities.getWindowAncestor(this);
             window.dispose(); //closes
+            System.exit(0);
         }
     }//GEN-LAST:event_exit2ActionPerformed
 

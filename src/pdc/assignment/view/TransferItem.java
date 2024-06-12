@@ -8,9 +8,19 @@ import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import pdc.assignment.model.Items;
+import pdc.assignment.model.Locations;
+import pdc.assignment.model.Transfer;
+import pdc.assignment.services.ItemInterface;
+import pdc.assignment.services.ItemManagement;
+import pdc.assignment.services.LocationInterface;
+import pdc.assignment.services.LocationManagement;
+import pdc.assignment.services.TransferInterface;
+import pdc.assignment.services.TransferManagement;
 
 /**
  *
@@ -18,14 +28,17 @@ import javax.swing.SwingUtilities;
  */
 public class TransferItem extends javax.swing.JPanel {
 
+    private final Locations location;
     private JFrame parentFrame;
+
     /**
      * Creates new form TransferItem
      */
-    public TransferItem(JFrame parentFrame) {
+    public TransferItem(Locations location, JFrame parentFrame) {
+        this.location = location;
         this.parentFrame = parentFrame;
         initComponents();
-                
+
         parentFrame.setMinimumSize(new Dimension(850, 690));
         // Add a ComponentListener to limit resizing
         parentFrame.addComponentListener(new ComponentAdapter() {
@@ -38,6 +51,30 @@ public class TransferItem extends javax.swing.JPanel {
                 }
             }
         });
+        loadItems();
+        loadLocations();
+    }
+
+    private void loadItems() {
+        ItemInterface it = new ItemManagement();
+        //populate transferItemsDropdown
+        List<Items> items = it.browseItemsByLocation(location);
+        if (items != null) {
+            for (Items item : items) {
+                transferItemDropdown.addItem(item.getName());
+            }
+        }
+    }
+
+    private void loadLocations() {
+        LocationInterface loc = new LocationManagement();
+        //populate transferLocationDropdown
+        List<Locations> locations = loc.browseLocations();
+        if (locations != null) {
+            for (Locations location : locations) {
+                transferLocationDropdown.addItem(location.getName());
+            }
+        }
     }
 
     /**
@@ -59,8 +96,6 @@ public class TransferItem extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         transferQuantity = new javax.swing.JTextField();
-
-        transferItemDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "English", "or", "Spanish?" }));
 
         jlabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jlabel1.setText("Select an item to transfer:");
@@ -171,7 +206,7 @@ public class TransferItem extends javax.swing.JPanel {
         JFrame itemPanelFrame = new JFrame("Item Panel");
         itemPanelFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         itemPanelFrame.setSize(850, 690);
-        itemPanelFrame.add(new ItemPanel(itemPanelFrame));
+        itemPanelFrame.add(new ItemPanel(location, itemPanelFrame));
         itemPanelFrame.setLocationRelativeTo(null); //center the frame
         itemPanelFrame.setVisible(true);
 
@@ -180,14 +215,50 @@ public class TransferItem extends javax.swing.JPanel {
 
     private void confirmTransferItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmTransferItemActionPerformed
         // TODO add your handling code here:
-        
+        if (isValidInput()) {
+            String itemName = (String) transferItemDropdown.getSelectedItem();
+            String loadLocation = (String) transferLocationDropdown.getSelectedItem();
+            LocationInterface loc = new LocationManagement();
+            Locations destLocation = loc.loadLocation(loadLocation);
+            if(!destLocation.equals(location)){
+            ItemInterface it = new ItemManagement();
+            Items transferItem = it.itemLoad(itemName, location);
+            TransferInterface Ti = new TransferManagement();
+            Transfer tran = new Transfer();
+            tran.setQuantity(Integer.parseInt(transferQuantity.getText()));
+            if(transferItem.getQuantity()-tran.getQuantity() >= 0){
+            tran.setSourceLocation(location);
+            tran.setItem(transferItem);
+            tran.setDestLocation(destLocation);
+
+            boolean transfered = Ti.transferItem(tran);
+
+            if (transfered) {
+                JOptionPane.showMessageDialog(this, "Item transfered successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to transfer item.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            }else{
+              JOptionPane.showMessageDialog(this, "Invalid input, make sure there is enough of this item to transfer", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            }else{
+              JOptionPane.showMessageDialog(this, "Invalid input, can't transfer to the location you are already in", "Error", JOptionPane.ERROR_MESSAGE);                
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid input, try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_confirmTransferItemActionPerformed
+
+    private boolean isValidInput() {
+        return !transferQuantity.getText().isEmpty();
+    }
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
         int confirmed = JOptionPane.showConfirmDialog(null,
-            "Are you sure you want to exit the program?", "Exit Program",
-            JOptionPane.YES_NO_OPTION);
+                "Are you sure you want to exit the program?", "Exit Program",
+                JOptionPane.YES_NO_OPTION);
 
         if (confirmed == JOptionPane.YES_OPTION) {
             //perform any cleanup or saving operations if needed
@@ -195,6 +266,7 @@ public class TransferItem extends javax.swing.JPanel {
             //close the main window or exit the application
             Window window = SwingUtilities.getWindowAncestor(this);
             window.dispose(); //closes
+            System.exit(0);
         }
     }//GEN-LAST:event_exitActionPerformed
 

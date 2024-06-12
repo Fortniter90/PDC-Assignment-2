@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import pdc.assignment.model.Locations;
+import pdc.assignment.services.LocationInterface;
 import pdc.assignment.services.LocationManagement;
 
 /**
@@ -23,13 +24,11 @@ import pdc.assignment.services.LocationManagement;
 public class RemoveLocation extends javax.swing.JPanel {
 
     private JFrame parentFrame;
-    private LocationManagement locationManagement;
     /**
      * Creates new form RemoveLocation
      */
     public RemoveLocation(JFrame parentFrame) {
         this.parentFrame = parentFrame;
-        this.locationManagement = new LocationManagement();
         initComponents();
         
         parentFrame.setMinimumSize(new Dimension(850, 690));
@@ -45,12 +44,13 @@ public class RemoveLocation extends javax.swing.JPanel {
             }
         });
         
-        loadLocations(); //load location to dropdown menu
+        loadLocations();
     }
     
         private void loadLocations() {
+        LocationInterface loc = new LocationManagement();
         //populate removeLocationDropdown with actual location names from database
-        List<Locations> locations = locationManagement.browseLocations();
+        List<Locations> locations = loc.browseLocations();
         if (locations != null) {
             for (Locations location : locations) {
                 removeLocationDropdown.addItem(location.getName());
@@ -77,7 +77,6 @@ public class RemoveLocation extends javax.swing.JPanel {
         removeLocationLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         removeLocationLabel.setText("Select a location to remove");
 
-        removeLocationDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         removeLocationDropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removeLocationDropdownActionPerformed(evt);
@@ -170,12 +169,14 @@ public class RemoveLocation extends javax.swing.JPanel {
 
     private void removeLocationConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeLocationConfirmActionPerformed
         // TODO add your handling code here:
+        LocationInterface loc = new LocationManagement();
+
         String selectedLocationName = (String) removeLocationDropdown.getSelectedItem();
 
             if (selectedLocationName != null && !selectedLocationName.isEmpty()) {
-                Locations location = locationManagement.loadLocation(selectedLocationName);
+                Locations location = loc.loadLocation(selectedLocationName);
                 if (location != null) {
-                    boolean removalSuccessful = locationManagement.deleteLocation(location); // Call a method to remove the item
+                    boolean removalSuccessful = loc.deleteLocation(location); // Call a method to remove the item
 
                     if (removalSuccessful) {
                         // Show a success message
@@ -186,7 +187,7 @@ public class RemoveLocation extends javax.swing.JPanel {
                     }
                 } else {
                     // Show an error message if no item is selected
-                    JOptionPane.showMessageDialog(this, "Please select an item to remove.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Please select an Loccation to remove.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }     
     }//GEN-LAST:event_removeLocationConfirmActionPerformed
@@ -204,6 +205,7 @@ public class RemoveLocation extends javax.swing.JPanel {
             //close the main window or exit the application
             Window window = SwingUtilities.getWindowAncestor(this);
             window.dispose(); //closes
+            System.exit(0);
         }
     }//GEN-LAST:event_exitActionPerformed
 

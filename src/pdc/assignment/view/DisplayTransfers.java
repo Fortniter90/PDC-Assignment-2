@@ -8,21 +8,29 @@ import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import pdc.assignment.model.Locations;
+import pdc.assignment.model.Transfer;
+import pdc.assignment.services.TransferInterface;
+import pdc.assignment.services.TransferManagement;
 
 /**
  *
  * @author kmann
  */
 public class DisplayTransfers extends javax.swing.JPanel {
-
+    private final Locations location;
     private JFrame parentFrame;
     /**
      * Creates new form DisplayTransfers
      */
-    public DisplayTransfers(JFrame parentFrame) {
+    public DisplayTransfers(Locations location,JFrame parentFrame) {
+        this.location = location;
         this.parentFrame = parentFrame;
         initComponents();
                 
@@ -38,7 +46,31 @@ public class DisplayTransfers extends javax.swing.JPanel {
                 }
             }
         });
+        setItemList();
     }
+    
+    public List<String> itemsToStrings(List<Transfer> transfer){
+        List <String> strings = new ArrayList<>();
+        for(Transfer transfers : transfer){
+            strings.add(transfers.toString());
+        }
+        return strings;
+    }
+    
+    private void setItemList() {
+    TransferInterface ti = new TransferManagement();
+    List<Transfer> transfers = ti.browseTransfers();
+    DefaultListModel<String> listModel = new DefaultListModel<>();
+    List<String> itemStrings = itemsToStrings(transfers);
+    if (!itemStrings.isEmpty()) {
+        for (String itemString : itemStrings) {
+            listModel.addElement(itemString);
+        }
+    } else {
+        listModel.addElement("No Transfers");
+    }
+    transfersList.setModel(listModel);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,17 +82,17 @@ public class DisplayTransfers extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        transfersList = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         exit = new javax.swing.JButton();
         displayItemBack = new javax.swing.JButton();
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        transfersList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(transfersList);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("List of transfers made");
@@ -132,11 +164,12 @@ public class DisplayTransfers extends javax.swing.JPanel {
         JFrame itemPanelFrame = new JFrame("Item Panel");
         itemPanelFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         itemPanelFrame.setSize(850, 690);
-        itemPanelFrame.add(new ItemPanel(itemPanelFrame));
+        itemPanelFrame.add(new ItemPanel(location,itemPanelFrame));
         itemPanelFrame.setLocationRelativeTo(null); //center the frame
         itemPanelFrame.setVisible(true);
 
         parentFrame.dispose(); //close panel
+        System.exit(0);
     }//GEN-LAST:event_displayItemBackActionPerformed
 
 
@@ -144,7 +177,7 @@ public class DisplayTransfers extends javax.swing.JPanel {
     private javax.swing.JButton displayItemBack;
     private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> transfersList;
     // End of variables declaration//GEN-END:variables
 }
