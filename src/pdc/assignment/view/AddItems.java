@@ -178,7 +178,6 @@ public class AddItems extends javax.swing.JPanel {
             newItem.setName(addItemName.getText());
             newItem.setQuantity(Integer.parseInt(addItemQuantity.getText())); //assuming quantity is an integer
             newItem.setPrice(Double.parseDouble(addItemPrice.getText())); //assuming price is a double
-            newItem.setCategory(addItemCategory.getText());
 
             ItemManagement itemManagement = new ItemManagement(); //adjust this as per your class structure
 
@@ -198,8 +197,7 @@ public class AddItems extends javax.swing.JPanel {
     private boolean isValidInput() {
         return !addItemName.getText().isEmpty() && 
                !addItemQuantity.getText().isEmpty() && 
-               !addItemPrice.getText().isEmpty() &&
-               !addItemCategory.getText().isEmpty();
+               !addItemPrice.getText().isEmpty();
         
     }
     
