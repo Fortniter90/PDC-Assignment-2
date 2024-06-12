@@ -119,6 +119,7 @@ public class Transfer implements Serializable {
         this.id = id;
     }
     
+    // Overrides a toString method
     @Override
     public String toString(){
         return "Transfered Item: " + getItem() + "Source Location: " + getSourceLocation().getName() + "Destination Location: " + getDestLocation().getName() + "Amount Transfered: " + getQuantity();

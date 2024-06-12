@@ -17,7 +17,7 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <!-- Specify our mapping files -->
+        <!-- Mapping files -->
         <mapping resource="pdc/assignment/model/Items.hbm.xml"/>
         <mapping resource="pdc/assignment/model/Locations.hbm.xml"/>
         <mapping resource="pdc/assignment/model/Transfer.hbm.xml"/>   

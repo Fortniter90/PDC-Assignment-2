@@ -32,45 +32,15 @@ public class Items implements Serializable {
         this.location = location;
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-    
-    @Override
-    public String toString() {
-        return "Name= " + getName() + ", Quantity= " + getQuantity() + ", Price= " + getPrice();
-    }
-
     /**
-     * @return the itemId
+     * @return the id
      */
     public int getId() {
         return id;
     }
 
     /**
-     * @param itemId the itemId to set
+     * @param id the id to set
      */
     public void setId(int id) {
         this.id = id;
@@ -88,5 +58,53 @@ public class Items implements Serializable {
      */
     public void setLocation(Locations location) {
         this.location = location;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * @return the price
+     */
+    public double getPrice() {
+        return price;
+    }
+
+    /**
+     * @param price the price to set
+     */
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    /**
+     * @return the quantity
+     */
+    public int getQuantity() {
+        return quantity;
+    }
+
+    /**
+     * @param quantity the quantity to set
+     */
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
+    // Overrides a toString method
+    @Override
+    public String toString() {
+        return "Name= " + getName() + ", Quantity= " + getQuantity() + ", Price= " + getPrice();
     }
 }

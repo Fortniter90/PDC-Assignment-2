@@ -47,10 +47,10 @@ public class RemoveLocation extends javax.swing.JPanel {
         
         loadLocations();
     }
-    
+        
+//populate removeLocationDropdown with actual location names from database    
         private void loadLocations() {
         LocationInterface loc = new LocationManagement();
-        //populate removeLocationDropdown with actual location names from database
         List<Locations> locations = loc.browseLocations();
         if (locations != null) {
             for (Locations location : locations) {

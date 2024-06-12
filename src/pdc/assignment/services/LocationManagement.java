@@ -19,6 +19,7 @@ import pdc.assignment.pkg2.HibernateUtil;
  */
 public class LocationManagement extends BaseLog implements LocationInterface {
 
+    // Adds a new location to the system.
     @Override
     public boolean addLocation(Locations location) {
         Session session = HibernateUtil.getSession();
@@ -44,6 +45,7 @@ public class LocationManagement extends BaseLog implements LocationInterface {
         return status;
     }
 
+    // Retrieves a list of all locations.
     @Override
     public List<Locations> browseLocations() {
         Session session = HibernateUtil.getSession();
@@ -68,6 +70,7 @@ public class LocationManagement extends BaseLog implements LocationInterface {
         return locations;
     }
 
+    // Deletes a specified location from the system.
     @Override
     public boolean deleteLocation(Locations location) {
         Session session = HibernateUtil.getSession();
@@ -78,23 +81,23 @@ public class LocationManagement extends BaseLog implements LocationInterface {
             Locations loadedLocation = (Locations) session.get(Locations.class, location.getId());
             if (loadedLocation != null) {
 
-            // Delete related transfers where location is source
-            Query deleteItemsQuery2 = session.createQuery("DELETE FROM Transfer WHERE sourceLocation.id = :locationId");
-            deleteItemsQuery2.setParameter("locationId", loadedLocation.getId());
-            deleteItemsQuery2.executeUpdate();
+                // Delete related transfers where location is source
+                Query deleteItemsQuery2 = session.createQuery("DELETE FROM Transfer WHERE sourceLocation.id = :locationId");
+                deleteItemsQuery2.setParameter("locationId", loadedLocation.getId());
+                deleteItemsQuery2.executeUpdate();
 
-            // Delete related transfers where location is destination
-            Query deleteItemsQuery3 = session.createQuery("DELETE FROM Transfer WHERE destLocation.id = :locationId");
-            deleteItemsQuery3.setParameter("locationId", loadedLocation.getId());
-            deleteItemsQuery3.executeUpdate();
-            
-            Query deleteItemsQuery = session.createQuery("DELETE FROM Items WHERE location.id = :locationId");
-            deleteItemsQuery.setParameter("locationId", loadedLocation.getId());
-            deleteItemsQuery.executeUpdate();
-            
-            session.delete(loadedLocation);
-            transaction.commit();
-            status = true;
+                // Delete related transfers where location is destination
+                Query deleteItemsQuery3 = session.createQuery("DELETE FROM Transfer WHERE destLocation.id = :locationId");
+                deleteItemsQuery3.setParameter("locationId", loadedLocation.getId());
+                deleteItemsQuery3.executeUpdate();
+                
+                Query deleteItemsQuery = session.createQuery("DELETE FROM Items WHERE location.id = :locationId");
+                deleteItemsQuery.setParameter("locationId", loadedLocation.getId());
+                deleteItemsQuery.executeUpdate();
+                
+                session.delete(loadedLocation);
+                transaction.commit();
+                status = true;
             } else {
                 transaction.rollback();
             }
@@ -108,6 +111,7 @@ public class LocationManagement extends BaseLog implements LocationInterface {
         return status;
     }
 
+    // Loads a specific location by its name.
     @Override
     public Locations loadLocation(String location) {
         Session session = HibernateUtil.getSession();

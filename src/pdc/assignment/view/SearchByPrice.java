@@ -47,7 +47,8 @@ public class SearchByPrice extends javax.swing.JPanel {
             }
         });
     }
-    
+   
+    //Loads items and populates the searchByPrice panel
     private void loadItemsByPrice(double price) {
         ItemManagement itemManagement = new ItemManagement();
         List<Items> items = itemManagement.searchItemByPrice(price,location);

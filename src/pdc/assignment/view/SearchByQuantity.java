@@ -45,7 +45,7 @@ public class SearchByQuantity extends javax.swing.JPanel {
             }
         });
     }
-    
+    //Loads items and populates the searchByQuantity panel
     private void loadItemsIntoList(int quantity) {
         ItemManagement itemManagement = new ItemManagement();
         List<Items> items = itemManagement.searchItemByQuantity(quantity,location);

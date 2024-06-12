@@ -55,10 +55,10 @@ public class TransferItem extends javax.swing.JPanel {
         loadItems();
         loadLocations();
     }
-
+    
+    //populate transferItemsDropdown
     private void loadItems() {
         ItemInterface it = new ItemManagement();
-        //populate transferItemsDropdown
         List<Items> items = it.browseItemsByLocation(location);
         if (items != null) {
             for (Items item : items) {
@@ -66,10 +66,10 @@ public class TransferItem extends javax.swing.JPanel {
             }
         }
     }
-
+    
+    //populate transferLocationDropdown
     private void loadLocations() {
         LocationInterface loc = new LocationManagement();
-        //populate transferLocationDropdown
         List<Locations> locations = loc.browseLocations();
         if (locations != null) {
             for (Locations location : locations) {

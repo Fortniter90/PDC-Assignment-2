@@ -51,6 +51,7 @@ public class DisplayItems extends javax.swing.JPanel {
         setItemList();
     }
     
+    //Turns items from list into strings
     public List<String> itemsToStrings(List<Items> items){
         List <String> strings = new ArrayList<>();
         for(Items item : items){
@@ -59,6 +60,7 @@ public class DisplayItems extends javax.swing.JPanel {
         return strings;
     }
     
+    //Loads strings into itemlist panel
     private void setItemList() {
     ItemInterface it = new ItemManagement();
     List<Items> items = it.browseItemsByLocation(location);

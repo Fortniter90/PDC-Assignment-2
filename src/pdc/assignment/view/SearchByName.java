@@ -48,7 +48,8 @@ public class SearchByName extends javax.swing.JPanel {
             }
         });
     }
-
+    
+    //Loads items and populates the searchByName panel
     private void loadItemsIntoList() {
         ItemManagement itemManagement = new ItemManagement();
         List<Items> items = itemManagement.browseItems();

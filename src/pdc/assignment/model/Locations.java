@@ -65,6 +65,7 @@ public class Locations implements Serializable {
         this.address = address;
     }
     
+    // Overrides a toString method
     @Override
     public String toString(){
         return "Name: " + getName() + ", Address: " + getAddress(); 

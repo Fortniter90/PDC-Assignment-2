@@ -49,7 +49,7 @@ public class DisplayTransfers extends javax.swing.JPanel {
         });
         setItemList();
     }
-    
+    //Turns transfer from list into strings.
     public List<String> itemsToStrings(List<Transfer> transfer){
         List <String> strings = new ArrayList<>();
         for(Transfer transfers : transfer){
@@ -58,6 +58,7 @@ public class DisplayTransfers extends javax.swing.JPanel {
         return strings;
     }
     
+    //Loads strings into transferlist panel
     private void setItemList() {
     TransferInterface ti = new TransferManagement();
     List<Transfer> transfers = ti.browseTransfers();

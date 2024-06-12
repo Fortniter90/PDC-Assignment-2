@@ -21,6 +21,7 @@ import pdc.assignment.pkg2.HibernateUtil;
  */
 public class TransferManagement extends BaseLog implements TransferInterface {
 
+    // Transfers an item to another location.
     @Override
     public boolean transferItem(Transfer transfer) {
         Session session = HibernateUtil.getSession();
@@ -58,7 +59,8 @@ public class TransferManagement extends BaseLog implements TransferInterface {
         }
         return status;
     }
-
+    
+    // Retrieves a list of all the transfers.
     @Override
     public List<Transfer> browseTransfers() {
         Session session = HibernateUtil.getSession();

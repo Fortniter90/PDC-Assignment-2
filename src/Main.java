@@ -13,7 +13,7 @@ import pdc.assignment.view.LocationPanel;
  * @author Ethan
  */
 public class Main {
-
+    //Runs Application By Openning Location Panel
     public static void main(String[] args) {
     JFrame frame = new JFrame("Location Panel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

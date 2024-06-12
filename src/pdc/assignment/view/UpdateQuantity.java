@@ -52,10 +52,10 @@ public class UpdateQuantity extends javax.swing.JPanel {
         });
         loadItems();
     }
-    
+
+     //populate removeItemsDropdown
      private void loadItems() {
          ItemInterface it = new ItemManagement();
-        //populate removeItemsDropdown
         List<Items> items = it.browseItemsByLocation(location);
         if (items != null) {
             for (Items item : items) {
