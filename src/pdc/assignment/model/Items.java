@@ -59,7 +59,7 @@ public class Items implements Serializable {
     
     @Override
     public String toString() {
-        return "name=" + getName() + ",quantity= " + getQuantity() + ", price=" + getPrice();
+        return "Name= " + getName() + ", Quantity= " + getQuantity() + ", Price= " + getPrice();
     }
 
     /**
