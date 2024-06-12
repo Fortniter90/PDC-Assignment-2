@@ -23,14 +23,11 @@ public class Items implements Serializable {
     
     private int quantity;
 
-    private String category;
-
     public Items() {}
 
-    public Items(String name, double price, String category, int quantity, Locations location) {
+    public Items(String name, double price, int quantity, Locations location) {
         this.name = name;
         this.price = price;
-        this.category = category;
         this.quantity = quantity;
         this.location = location;
     }
@@ -52,14 +49,6 @@ public class Items implements Serializable {
         this.price = price;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -70,7 +59,7 @@ public class Items implements Serializable {
     
     @Override
     public String toString() {
-        return "Item [id=" + getId() + ", name=" + getName() + ",quantity= " + getQuantity() + ", price=" + getPrice() + ", category=" + getCategory() + "]";
+        return "name=" + getName() + ",quantity= " + getQuantity() + ", price=" + getPrice();
     }
 
     /**

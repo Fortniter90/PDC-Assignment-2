@@ -35,7 +35,7 @@ public class TransferManagement extends BaseLog implements TransferInterface {
                 session.update(loadedItem);
 
                 ItemInterface it = new ItemManagement();
-                Items it1 = new Items(item.getName(), item.getPrice(), item.getCategory(), item.getQuantity(), transfer.getDestLocation());
+                Items it1 = new Items(item.getName(), item.getPrice(), item.getQuantity(), transfer.getDestLocation());
                 boolean work = it.transferAddItem(session, it1);
                 if (false == work) {
                     Items loadedItem2 = it.itemTransferLoad(session, item.getName(), transfer.getDestLocation());

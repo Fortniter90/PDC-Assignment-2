@@ -77,9 +77,21 @@ public class LocationManagement extends BaseLog implements LocationInterface {
             transaction = session.beginTransaction();
             Locations loadedLocation = (Locations) session.get(Locations.class, location.getId());
             if (loadedLocation != null) {
+
+            // Delete related transfers where location is source
+            Query deleteItemsQuery2 = session.createQuery("DELETE FROM Transfer WHERE sourceLocation.id = :locationId");
+            deleteItemsQuery2.setParameter("locationId", loadedLocation.getId());
+            deleteItemsQuery2.executeUpdate();
+
+            // Delete related transfers where location is destination
+            Query deleteItemsQuery3 = session.createQuery("DELETE FROM Transfer WHERE destLocation.id = :locationId");
+            deleteItemsQuery3.setParameter("locationId", loadedLocation.getId());
+            deleteItemsQuery3.executeUpdate();
+            
             Query deleteItemsQuery = session.createQuery("DELETE FROM Items WHERE location.id = :locationId");
             deleteItemsQuery.setParameter("locationId", loadedLocation.getId());
             deleteItemsQuery.executeUpdate();
+            
             session.delete(loadedLocation);
             transaction.commit();
             status = true;

@@ -30,26 +30,29 @@ public class Main {
         LocationInterface loc = new LocationManagement();
         TransferInterface tran = new TransferManagement();
         
-        Locations loc1 = new Locations("Peppe Palaece2", "1 road");
+        Locations lo1 = new Locations("Peppe Palaece", "10 road");
         
         
-        Items it1 = new Items("pep1", 20.16, "Weird", 10, loc1);
-       //loc.addLocation(loc1);
-       // it.addItem(it1);
+     //  loc.addLocation(lo1);
+      //  it.addItem(it1);
  //       it.updateQuantity(it1, 20);
        // loc.browseLocations();
-       Locations locc2 = loc.loadLocation("Peppe Palaece");
+      Locations locc2 = loc.loadLocation("Peppe Palaece");
+              Items it1 = new Items("Woek", 20.16, 10, locc2);
+
+      //        it.addItem(it1);
+
        loc.browseLocations(); 
-       Items itt1 = it.itemLoad("pep1", locc2);
+       Items itt1 = it.itemLoad("Woek", null);
        Locations locc3 = loc.loadLocation("Peppe Palaece2");
        
        Transfer trans = new Transfer(itt1,locc2,locc3,1);
        
-       tran.transferItem(trans);
+   //   tran.transferItem(trans);
        
-       
+     // it.deleteItem(itt1);
     
-   //   loc.deleteLocation(locc2);
+    // loc.deleteLocation(locc2);
    //    loc.deleteLocation(locc3);
        loc.browseLocations();
        

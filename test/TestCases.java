@@ -62,10 +62,10 @@ public class TestCases {
           Locations location2 = new Locations("Location2", "Address2");
           locationService.addLocation(location);
           locationService.addLocation(location2);
-          Items item = new Items("Item1", 14.40, "Category1", 20, location);
+          Items item = new Items("Item1", 14.40, 20, location);
           assertTrue(itemService.addItem(item));
           assertFalse(itemService.addItem(item));
-          Items item2 = new Items("Item1", 14.40, "Category1", 20, location2);
+          Items item2 = new Items("Item1", 14.40, 20, location2);
           assertTrue(itemService.addItem(item2));
           assertTrue(itemService.deleteItem(item));
           assertTrue(itemService.deleteItem(item2));        
@@ -78,18 +78,15 @@ public class TestCases {
        public void testAllSearchItemMethods(){
           Locations location = new Locations("Location1", "Address1");
           assertTrue(locationService.addLocation(location));
-          Items item = new Items("Item1", 14.40, "Category1", 20, location);
+          Items item = new Items("Item1", 14.40, 20, location);
           assertTrue(itemService.addItem(item));
-          Items item2 = new Items("Item2", 14.80, "Category1", 30, location);
+          Items item2 = new Items("Item2", 14.80, 30, location);
           itemService.addItem(item2);
-          Items item3 = new Items("Item3", 14.40, "Category2", 20, location);
+          Items item3 = new Items("Item3", 14.40, 20, location);
           itemService.addItem(item3);
           
          assertNotNull(itemService.searchItemByName("Item1"));
          assertNotNull(itemService.searchItemByName("Item2"));
-          
-          assertNotNull(itemService.searchItemByCategory("Category1"));
-          assertNotNull(itemService.searchItemByCategory("Category2"));
           
           assertNotNull(itemService.searchItemByPrice(14.40));
           assertNotNull(itemService.searchItemByPrice(14.80));

@@ -8,9 +8,15 @@ import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import pdc.assignment.model.Items;
+import pdc.assignment.services.ItemInterface;
+import pdc.assignment.services.ItemManagement;
 
 /**
  *
@@ -38,7 +44,31 @@ public class DisplayItems extends javax.swing.JPanel {
                 }
             }
         });
+        setItemList();
     }
+    
+    public List<String> itemsToStrings(List<Items> items){
+        List <String> strings = new ArrayList<>();
+        for(Items item : items){
+            strings.add(item.toString());
+        }
+        return strings;
+    }
+    
+    private void setItemList() {
+    ItemInterface it = new ItemManagement();
+    List<Items> items = it.browseItems();
+    DefaultListModel<String> listModel = new DefaultListModel<>();
+    List<String> itemStrings = itemsToStrings(items);
+    if (!itemStrings.isEmpty()) {
+        for (String itemString : itemStrings) {
+            listModel.addElement(itemString);
+        }
+    } else {
+        listModel.addElement("No Items");
+    }
+    itemList.setModel(listModel);
+}
     
 
     /**
@@ -51,17 +81,17 @@ public class DisplayItems extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        itemList = new javax.swing.JList<>();
         displayItemBack = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         exit = new javax.swing.JButton();
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        itemList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(itemList);
 
         displayItemBack.setText("Go back");
         displayItemBack.addActionListener(new java.awt.event.ActionListener() {
@@ -143,8 +173,8 @@ public class DisplayItems extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton displayItemBack;
     private javax.swing.JButton exit;
+    private javax.swing.JList<String> itemList;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

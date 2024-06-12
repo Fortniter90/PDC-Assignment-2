@@ -81,6 +81,9 @@ public class ItemManagement extends BaseLog implements ItemInterface {
             transaction = session.beginTransaction();
             Items loadedItems = (Items) session.get(Items.class, item.getId());
             if (loadedItems != null) {
+                Query deleteItemsQuery = session.createQuery("DELETE FROM Transfer WHERE item.id = :itemId");
+                deleteItemsQuery.setParameter("itemId", loadedItems.getId());
+                deleteItemsQuery.executeUpdate();
                 session.delete(loadedItems);
                 transaction.commit();
                 status = true;
@@ -127,37 +130,6 @@ public class ItemManagement extends BaseLog implements ItemInterface {
             e.printStackTrace();
         }
         return removed;
-    }
-    
-    public boolean reduceItemQuantity(Items item, int quantityToRemove) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = null;
-        boolean status = false;
-        try {
-            transaction = session.beginTransaction();
-            Items loadedItem = (Items) session.get(Items.class, item.getId());
-            if (loadedItem != null) {
-                int currentQuantity = loadedItem.getQuantity();
-                if (currentQuantity >= quantityToRemove) {
-                    loadedItem.setQuantity(currentQuantity - quantityToRemove);
-                    session.update(loadedItem);
-                    transaction.commit();
-                    status = true;
-                } else {
-                    // Not enough quantity available to remove
-                    transaction.rollback();
-                }
-            }
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            logger.info("ERROR Occurs in ItemManagement - reduceItemQuantity!");
-            e.printStackTrace();
-        } finally {
-            session.close(); // Close the session
-        }
-        return status;
     }
 
     @Override

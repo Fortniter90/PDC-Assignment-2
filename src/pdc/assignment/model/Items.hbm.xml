@@ -9,7 +9,6 @@
         <property column="Name" generated="never" lazy="false" name="name" type="string"/>
         <property column="Quantity" generated="never" lazy="false" name="quantity" type="int"/>
         <property column="Price" generated="never" lazy="false" name="price" type="double"/>
-        <property column="Category" generated="never" lazy="false" name="category" type="string"/>
         
         <many-to-one class="pdc.assignment.model.Locations" column="Location" name="location"/>
         
