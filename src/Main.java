@@ -13,7 +13,10 @@ import pdc.assignment.services.LocationManagement;
 import java.util.List;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
+import pdc.assignment.model.Transfer;
 import pdc.assignment.pkg2.HibernateUtil;
+import pdc.assignment.services.TransferInterface;
+import pdc.assignment.services.TransferManagement;
 
 /**
  *
@@ -25,24 +28,33 @@ public class Main {
 
         ItemInterface it = new ItemManagement();
         LocationInterface loc = new LocationManagement();
+        TransferInterface tran = new TransferManagement();
         
-        Locations loc1 = new Locations("Peppe Palaece", "119 road");
+        Locations loc1 = new Locations("Peppe Palaece2", "1 road");
         
         
         Items it1 = new Items("pep1", 20.16, "Weird", 10, loc1);
-        loc.addLocation(loc1);
-        it.addItem(it1);
-        
-        it.updateQuantity(it1, 20);
+       //loc.addLocation(loc1);
+       // it.addItem(it1);
+ //       it.updateQuantity(it1, 20);
        // loc.browseLocations();
-        Locations locc2 = loc.loadLocation("Peppe Palaece");
+       Locations locc2 = loc.loadLocation("Peppe Palaece");
        loc.browseLocations(); 
-    //   Locations locc3 = loc.loadLocation("Location3");
+       Items itt1 = it.itemLoad("pep1", locc2);
+       Locations locc3 = loc.loadLocation("Peppe Palaece2");
+       
+       Transfer trans = new Transfer(itt1,locc2,locc3,1);
+       
+       tran.transferItem(trans);
+       
+       
+    
    //   loc.deleteLocation(locc2);
    //    loc.deleteLocation(locc3);
        loc.browseLocations();
        
         it.browseItems();
+        tran.browseTransfers();
        
        
         

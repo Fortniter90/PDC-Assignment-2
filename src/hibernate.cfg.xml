@@ -20,5 +20,6 @@
         <!-- Specify our mapping files -->
         <mapping resource="pdc/assignment/model/Items.hbm.xml"/>
         <mapping resource="pdc/assignment/model/Locations.hbm.xml"/>
+        <mapping resource="pdc/assignment/model/Transfer.hbm.xml"/>   
     </session-factory>
 </hibernate-configuration>

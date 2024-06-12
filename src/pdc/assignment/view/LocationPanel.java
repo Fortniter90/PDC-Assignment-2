@@ -6,25 +6,50 @@ package pdc.assignment.view;
 
 import java.awt.Dimension;
 import java.awt.Window;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import pdc.assignment.model.Locations;
+import pdc.assignment.services.LocationInterface;
+import pdc.assignment.services.LocationManagement;
 
 /**
  *
  * @author klinsmann
  */
 public class LocationPanel extends javax.swing.JPanel {
-    
+
     private JFrame parentFrame;
-    
+
     /**
      * Creates new form Location
      */
     public LocationPanel(JFrame parentFrame) {
         this.parentFrame = parentFrame;
         initComponents();
-        
+        setLocationList();
+    }
+
+    public List<String> locationsToStrings(List<Locations> locations) {
+        List<String> strings = new ArrayList<>();
+        for (Locations location : locations) {
+            strings.add(location.getName());
+        }
+        return strings;
+    }
+    
+    private void setLocationList() {
+        LocationInterface loc = new LocationManagement();
+        List<Locations> locations = loc.browseLocations();
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        List<String> locationStrings = locationsToStrings(locations);
+        for (String locationString : locationStrings) {
+            listModel.addElement(locationString);
+        }
+        locationlist.setModel(listModel);
     }
 
     /**
@@ -139,35 +164,35 @@ public class LocationPanel extends javax.swing.JPanel {
 
     private void addLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLocationActionPerformed
         // TODO add your handling code here:
-        
+
         JFrame addLocationFrame = new JFrame("Add new location");
         addLocationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addLocationFrame.setSize(850, 690); //window size of addlocation.java
         addLocationFrame.add(new AddLocation(addLocationFrame));
         addLocationFrame.setLocationRelativeTo(null); //center the frame FRAME PLACEMENT
-        addLocationFrame.setVisible(true); 
-        
+        addLocationFrame.setVisible(true);
+
         parentFrame.dispose();
     }//GEN-LAST:event_addLocationActionPerformed
 
     private void removeLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeLocationActionPerformed
         // TODO add your handling code here:
-        
+
         JFrame removeLocationFrame = new JFrame("Remove a location");
         removeLocationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         removeLocationFrame.setSize(850, 690); //window size of addlocation.java
         removeLocationFrame.add(new RemoveLocation(removeLocationFrame));
         removeLocationFrame.setLocationRelativeTo(null); //center the frame FRAME PLACEMENT
-        removeLocationFrame.setVisible(true);   
-        
+        removeLocationFrame.setVisible(true);
+
         parentFrame.dispose();
     }//GEN-LAST:event_removeLocationActionPerformed
 
     private void exit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exit1ActionPerformed
         // TODO add your handling code here:
         int confirmed = JOptionPane.showConfirmDialog(null,
-            "Are you sure you want to exit the program?", "Exit Program",
-            JOptionPane.YES_NO_OPTION);
+                "Are you sure you want to exit the program?", "Exit Program",
+                JOptionPane.YES_NO_OPTION);
 
         if (confirmed == JOptionPane.YES_OPTION) {
             //perform any cleanup or saving operations if needed
@@ -181,10 +206,10 @@ public class LocationPanel extends javax.swing.JPanel {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Location Panel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         //set the preffered size of window
         frame.setPreferredSize(new Dimension(850, 690));
-    
+
         //set minimum size of window
         frame.setMinimumSize(new Dimension(850, 690));
 
@@ -192,7 +217,7 @@ public class LocationPanel extends javax.swing.JPanel {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
