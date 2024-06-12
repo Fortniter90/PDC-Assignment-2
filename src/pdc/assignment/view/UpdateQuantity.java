@@ -15,6 +15,7 @@ import javax.swing.SwingUtilities;
 import pdc.assignment.model.Items;
 import pdc.assignment.model.Locations;
 import pdc.assignment.model.Transfer;
+import pdc.assignment.pkg2.HibernateUtil;
 import pdc.assignment.services.ItemInterface;
 import pdc.assignment.services.ItemManagement;
 import pdc.assignment.services.LocationInterface;
@@ -207,6 +208,7 @@ public class UpdateQuantity extends javax.swing.JPanel {
             //close the main window or exit the application
             Window window = SwingUtilities.getWindowAncestor(this);
             window.dispose(); //closes
+            HibernateUtil.shutdown();
             System.exit(0);
         }
     }//GEN-LAST:event_exitActionPerformed
@@ -218,7 +220,6 @@ public class UpdateQuantity extends javax.swing.JPanel {
             ItemInterface it = new ItemManagement();
             Items item = it.itemLoad(itemName, location);
             
-            
             boolean updated = it.updateQuantity(item, (Integer.parseInt(updateQuantityBox.getText())));
 
             if (updated) {
@@ -229,8 +230,6 @@ public class UpdateQuantity extends javax.swing.JPanel {
             }else{
               JOptionPane.showMessageDialog(this, "Invalid input, try again", "Error", JOptionPane.ERROR_MESSAGE);
             }
-
-        
     }//GEN-LAST:event_updateQuantityConfirmActionPerformed
                                                   
 
