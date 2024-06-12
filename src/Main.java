@@ -5,20 +5,7 @@
 
 
 import java.awt.Dimension;
-import pdc.assignment.model.Items;
-import pdc.assignment.services.ItemInterface;
-import pdc.assignment.services.ItemManagement;
-import pdc.assignment.model.Locations;
-import pdc.assignment.services.LocationInterface;
-import pdc.assignment.services.LocationManagement;
-import java.util.List;
 import javax.swing.JFrame;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.tool.hbm2ddl.SchemaExport;
-import pdc.assignment.model.Transfer;
-import pdc.assignment.pkg2.HibernateUtil;
-import pdc.assignment.services.TransferInterface;
-import pdc.assignment.services.TransferManagement;
 import pdc.assignment.view.LocationPanel;
 
 /**
