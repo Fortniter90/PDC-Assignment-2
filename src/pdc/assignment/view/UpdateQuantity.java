@@ -11,6 +11,8 @@ import java.awt.event.ComponentEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import pdc.assignment.model.Locations;
+
 
 /**
  *
@@ -19,11 +21,13 @@ import javax.swing.SwingUtilities;
 public class UpdateQuantity extends javax.swing.JPanel {
 
     private JFrame parentFrame;
+    private final Locations location;
     /**
      * Creates new form UpdateQuantity
      */
-    public UpdateQuantity(JFrame parentFrame) {
+    public UpdateQuantity(Locations location, JFrame parentFrame) {
         this.parentFrame = parentFrame;
+        this.location = location;
         initComponents();
         
         parentFrame.setMinimumSize(new Dimension(850, 690));
@@ -166,7 +170,7 @@ public class UpdateQuantity extends javax.swing.JPanel {
         JFrame itemPanelFrame = new JFrame("Item Panel");
         itemPanelFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         itemPanelFrame.setSize(850, 690);
-        itemPanelFrame.add(new ItemPanel(itemPanelFrame));
+        itemPanelFrame.add(new ItemPanel(location,itemPanelFrame));
         itemPanelFrame.setLocationRelativeTo(null); //center the frame
         itemPanelFrame.setVisible(true);
 

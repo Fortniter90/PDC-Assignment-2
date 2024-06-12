@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import pdc.assignment.model.Items;
+import pdc.assignment.model.Locations;
 import pdc.assignment.services.ItemManagement;
 
 /**
@@ -24,11 +25,13 @@ import pdc.assignment.services.ItemManagement;
 public class SearchByPrice extends javax.swing.JPanel {
 
     private JFrame parentFrame;
+    private final Locations location;    
     /**
      * Creates new form SearchByPrice
      */
-    public SearchByPrice(JFrame parentFrame) {
+    public SearchByPrice(Locations location, JFrame parentFrame) {
         this.parentFrame = parentFrame;
+        this.location = location;
         initComponents();
                         
         parentFrame.setMinimumSize(new Dimension(850, 690));
@@ -159,7 +162,7 @@ public class SearchByPrice extends javax.swing.JPanel {
         JFrame itemPanelFrame = new JFrame("Item Panel");
         itemPanelFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         itemPanelFrame.setSize(850, 690);
-        itemPanelFrame.add(new ItemPanel(itemPanelFrame));
+        itemPanelFrame.add(new ItemPanel(location,itemPanelFrame));
         itemPanelFrame.setLocationRelativeTo(null); //center the frame
         itemPanelFrame.setVisible(true);
 

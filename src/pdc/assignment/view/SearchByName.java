@@ -16,6 +16,7 @@ import javax.swing.SwingUtilities;
 
 import pdc.assignment.services.ItemManagement;
 import pdc.assignment.model.Items;
+import pdc.assignment.model.Locations;
 /**
  *
  * @author klinsmann
@@ -23,11 +24,13 @@ import pdc.assignment.model.Items;
 public class SearchByName extends javax.swing.JPanel {
 
     private JFrame parentFrame;
+    private final Locations location;
     /**
      * Creates new form SearchByName
      */
-    public SearchByName(JFrame parentFrame) {
+    public SearchByName(Locations location, JFrame parentFrame) {
         this.parentFrame = parentFrame;
+        this.location = location;
         initComponents();
         
         loadItemsIntoList();
@@ -165,7 +168,7 @@ public class SearchByName extends javax.swing.JPanel {
         JFrame itemPanelFrame = new JFrame("Item Panel");
         itemPanelFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         itemPanelFrame.setSize(850, 690);
-        itemPanelFrame.add(new ItemPanel(itemPanelFrame));
+        itemPanelFrame.add(new ItemPanel(location,itemPanelFrame));
         itemPanelFrame.setLocationRelativeTo(null); //center the frame
         itemPanelFrame.setVisible(true);
 
