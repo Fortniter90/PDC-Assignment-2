@@ -14,6 +14,7 @@ import javax.swing.SwingUtilities;
 
 import pdc.assignment.model.Items;
 import pdc.assignment.model.Locations;
+import pdc.assignment.pkg2.HibernateUtil;
 import pdc.assignment.services.ItemManagement;
 
 /**
@@ -216,6 +217,7 @@ public class AddItems extends javax.swing.JPanel {
             //close the main window or exit the application
             Window window = SwingUtilities.getWindowAncestor(this);
             window.dispose(); //closes
+            HibernateUtil.shutdown();
             System.exit(0);
         }
     }//GEN-LAST:event_exit2ActionPerformed

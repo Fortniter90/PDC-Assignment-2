@@ -40,9 +40,7 @@ public class Main {
         frame.getContentPane().add(new LocationPanel(frame));
         frame.pack();
         frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        HibernateUtil.shutdown();
-        
+        frame.setVisible(true);        
     }
 
 }
