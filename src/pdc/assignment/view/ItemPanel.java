@@ -46,6 +46,8 @@ public class ItemPanel extends javax.swing.JPanel {
         itempanelback = new javax.swing.JButton();
         exit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        updateQuantity = new javax.swing.JButton();
+        displayTransfers = new javax.swing.JButton();
 
         removeItem.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         removeItem.setText("Remove an Item");
@@ -105,6 +107,22 @@ public class ItemPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Item Management");
 
+        updateQuantity.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        updateQuantity.setText("Update Quantity");
+        updateQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateQuantityActionPerformed(evt);
+            }
+        });
+
+        displayTransfers.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        displayTransfers.setText("Display Transfers");
+        displayTransfers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                displayTransfersActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,12 +130,14 @@ public class ItemPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(346, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(displayTransfers, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addItem, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(itempanelback, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchItem, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(displayItems, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(transferItems, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(removeItem, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addItem, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(40, 40, 40)
@@ -129,21 +149,25 @@ public class ItemPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jLabel1)
-                .addGap(37, 37, 37)
+                .addGap(17, 17, 17)
                 .addComponent(addItem, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(removeItem, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(updateQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(transferItems, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(displayItems, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(displayTransfers, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(searchItem, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(displayItems, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(itempanelback, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(exit)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -239,6 +263,32 @@ public class ItemPanel extends javax.swing.JPanel {
             window.dispose(); //closes 
         }
     }//GEN-LAST:event_exitActionPerformed
+
+    private void updateQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateQuantityActionPerformed
+        // TODO add your handling code here:
+        
+        JFrame updateQuantityFrame = new JFrame("Search for an item");
+        updateQuantityFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        updateQuantityFrame.setSize(850, 690);
+        updateQuantityFrame.add(new UpdateQuantity(updateQuantityFrame));
+        updateQuantityFrame.setLocationRelativeTo(null); //center the frame
+        updateQuantityFrame.setVisible(true);      
+          
+        parentFrame.dispose(); // close panel
+    }//GEN-LAST:event_updateQuantityActionPerformed
+
+    private void displayTransfersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayTransfersActionPerformed
+        // TODO add your handling code here:
+                
+        JFrame displayTransfersFrame = new JFrame("Search for an item");
+        displayTransfersFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        displayTransfersFrame.setSize(850, 690);
+        displayTransfersFrame.add(new DisplayTransfers(displayTransfersFrame));
+        displayTransfersFrame.setLocationRelativeTo(null); //center the frame
+        displayTransfersFrame.setVisible(true);      
+          
+        parentFrame.dispose(); // close panel
+    }//GEN-LAST:event_displayTransfersActionPerformed
     
     public static void main(String[] args) {
         JFrame frame = new JFrame("Item Panel");
@@ -260,11 +310,13 @@ public class ItemPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addItem;
     private javax.swing.JButton displayItems;
+    private javax.swing.JButton displayTransfers;
     private javax.swing.JButton exit;
     private javax.swing.JButton itempanelback;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton removeItem;
     private javax.swing.JButton searchItem;
     private javax.swing.JButton transferItems;
+    private javax.swing.JButton updateQuantity;
     // End of variables declaration//GEN-END:variables
 }

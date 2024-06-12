@@ -59,8 +59,6 @@ public class SearchItems extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         searchQuantityLabel1 = new javax.swing.JLabel();
         searchQuantity1 = new javax.swing.JTextField();
-        searchQuantityLabel2 = new javax.swing.JLabel();
-        searchItemName1 = new javax.swing.JTextField();
 
         searchItemBack.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchItemBack.setText("Go back");
@@ -97,9 +95,6 @@ public class SearchItems extends javax.swing.JPanel {
         searchQuantityLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchQuantityLabel1.setText("Price:");
 
-        searchQuantityLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        searchQuantityLabel2.setText("Category:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,14 +113,11 @@ public class SearchItems extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(searchItemConfirm))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(searchNameLabel)
-                                    .addComponent(searchQuantityLabel2))
+                                .addComponent(searchNameLabel)
                                 .addGap(96, 96, 96)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(searchItemName, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(searchQuantity1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(searchItemName1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(searchQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(190, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -147,23 +139,19 @@ public class SearchItems extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchNameLabel)
                     .addComponent(searchItemName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchQuantityLabel2)
-                    .addComponent(searchItemName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
+                .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchQuantityLabel1)
                     .addComponent(searchQuantity1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
+                .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchQuantityLabel)
                     .addComponent(searchQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchItemBack)
                     .addComponent(searchItemConfirm))
-                .addGap(88, 88, 88)
+                .addGap(145, 145, 145)
                 .addComponent(exit)
                 .addGap(27, 27, 27))
         );
@@ -223,12 +211,10 @@ public class SearchItems extends javax.swing.JPanel {
     private javax.swing.JButton searchItemBack;
     private javax.swing.JButton searchItemConfirm;
     private javax.swing.JTextField searchItemName;
-    private javax.swing.JTextField searchItemName1;
     private javax.swing.JLabel searchNameLabel;
     private javax.swing.JTextField searchQuantity;
     private javax.swing.JTextField searchQuantity1;
     private javax.swing.JLabel searchQuantityLabel;
     private javax.swing.JLabel searchQuantityLabel1;
-    private javax.swing.JLabel searchQuantityLabel2;
     // End of variables declaration//GEN-END:variables
 }
