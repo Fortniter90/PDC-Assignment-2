@@ -50,35 +50,17 @@ public class SearchItems extends javax.swing.JPanel {
     private void initComponents() {
 
         searchItemBack = new javax.swing.JButton();
-        searchNameLabel = new javax.swing.JLabel();
-        searchQuantityLabel = new javax.swing.JLabel();
-        searchItemName = new javax.swing.JTextField();
-        searchQuantity = new javax.swing.JTextField();
-        searchItemConfirm = new javax.swing.JButton();
         exit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        searchQuantityLabel1 = new javax.swing.JLabel();
-        searchQuantity1 = new javax.swing.JTextField();
+        searchByName = new javax.swing.JButton();
+        searchByQuantity = new javax.swing.JButton();
+        searchByPrice = new javax.swing.JButton();
 
         searchItemBack.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchItemBack.setText("Go back");
         searchItemBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchItemBackActionPerformed(evt);
-            }
-        });
-
-        searchNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        searchNameLabel.setText("Item Name:");
-
-        searchQuantityLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        searchQuantityLabel.setText("Quantity:");
-
-        searchItemConfirm.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        searchItemConfirm.setText("Search");
-        searchItemConfirm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchItemConfirmActionPerformed(evt);
             }
         });
 
@@ -92,68 +74,65 @@ public class SearchItems extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Search for an item");
 
-        searchQuantityLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        searchQuantityLabel1.setText("Price:");
+        searchByName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchByName.setText("Search by Name");
+        searchByName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchByNameActionPerformed(evt);
+            }
+        });
+
+        searchByQuantity.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchByQuantity.setText("Search by Quantity");
+        searchByQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchByQuantityActionPerformed(evt);
+            }
+        });
+
+        searchByPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        searchByPrice.setText("Search by Price");
+        searchByPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchByPriceActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(208, Short.MAX_VALUE)
+                .addContainerGap(347, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(searchItemBack)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(searchItemConfirm))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(searchNameLabel)
-                                .addGap(96, 96, 96)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(searchItemName, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(searchQuantity1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(searchQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(190, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(exit)
-                        .addGap(32, 32, 32))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(searchByName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(searchByQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(searchByPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchQuantityLabel1)
-                            .addComponent(searchQuantityLabel))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(searchItemBack))))
+                .addContainerGap(347, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(77, 77, 77)
+                .addGap(90, 90, 90)
                 .addComponent(jLabel1)
-                .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchNameLabel)
-                    .addComponent(searchItemName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchQuantityLabel1)
-                    .addComponent(searchQuantity1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchQuantityLabel)
-                    .addComponent(searchQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchItemBack)
-                    .addComponent(searchItemConfirm))
-                .addGap(145, 145, 145)
-                .addComponent(exit)
-                .addGap(27, 27, 27))
+                .addGap(44, 44, 44)
+                .addComponent(searchByName, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
+                .addComponent(searchByPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(searchByQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(searchItemBack)
+                .addGap(27, 27, 27)
+                .addComponent(exit, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(109, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -170,16 +149,6 @@ public class SearchItems extends javax.swing.JPanel {
         parentFrame.dispose(); //close panel
     }//GEN-LAST:event_searchItemBackActionPerformed
 
-    private void searchItemConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchItemConfirmActionPerformed
-        // TODO add your handling code here:
-        //if input valid
-        if (isValidInput()) {
-            JOptionPane.showMessageDialog(this, "Item added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            //if invalid
-        } else {
-            JOptionPane.showMessageDialog(this, "Invalid input, try again.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_searchItemConfirmActionPerformed
 
     private boolean isValidInput() {
         return !searchItemName.getText().isEmpty() && 
@@ -204,17 +173,52 @@ public class SearchItems extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_exitActionPerformed
 
+    private void searchByQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByQuantityActionPerformed
+        // TODO add your handling code here:
+                
+        JFrame searchByQuantityFrame = new JFrame("Add new item");
+        searchByQuantityFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        searchByQuantityFrame.setSize(850, 690);
+        searchByQuantityFrame.add(new SearchByQuantity(searchByQuantityFrame));
+        searchByQuantityFrame.setLocationRelativeTo(null); //center the frame
+        searchByQuantityFrame.setVisible(true);      
+          
+        parentFrame.dispose(); // close panel
+    }//GEN-LAST:event_searchByQuantityActionPerformed
+
+    private void searchByPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByPriceActionPerformed
+        // TODO add your handling code here:
+                
+        JFrame searchByPriceFrame = new JFrame("Add new item");
+        searchByPriceFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        searchByPriceFrame.setSize(850, 690);
+        searchByPriceFrame.add(new SearchByPrice(searchByPriceFrame));
+        searchByPriceFrame.setLocationRelativeTo(null); //center the frame
+        searchByPriceFrame.setVisible(true);      
+          
+        parentFrame.dispose(); // close panel
+    }//GEN-LAST:event_searchByPriceActionPerformed
+
+    private void searchByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByNameActionPerformed
+        // TODO add your handling code here:
+                
+        JFrame searchByNameFrame = new JFrame("Add new item");
+        searchByNameFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        searchByNameFrame.setSize(850, 690);
+        searchByNameFrame.add(new SearchByName(searchByNameFrame));
+        searchByNameFrame.setLocationRelativeTo(null); //center the frame
+        searchByNameFrame.setVisible(true);      
+          
+        parentFrame.dispose(); // close panel
+    }//GEN-LAST:event_searchByNameActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton searchByName;
+    private javax.swing.JButton searchByPrice;
+    private javax.swing.JButton searchByQuantity;
     private javax.swing.JButton searchItemBack;
-    private javax.swing.JButton searchItemConfirm;
-    private javax.swing.JTextField searchItemName;
-    private javax.swing.JLabel searchNameLabel;
-    private javax.swing.JTextField searchQuantity;
-    private javax.swing.JTextField searchQuantity1;
-    private javax.swing.JLabel searchQuantityLabel;
-    private javax.swing.JLabel searchQuantityLabel1;
     // End of variables declaration//GEN-END:variables
 }
