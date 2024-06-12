@@ -19,6 +19,8 @@ public interface ItemInterface {
     
     public List<Items> browseItems();
     
+    public List<Items> browseItemsByLocation(Locations location);
+    
     public boolean deleteItem(Items item);
     
     public boolean updateQuantity(Items item, int amount);

@@ -32,6 +32,8 @@ public class LocationPanel extends javax.swing.JPanel {
         initComponents();
         setLocationList();
     }
+    
+    private static Locations locationToItem = null;
 
     public List<String> locationsToStrings(List<Locations> locations) {
         List<String> strings = new ArrayList<>();
@@ -80,6 +82,11 @@ public class LocationPanel extends javax.swing.JPanel {
 
         selectLocation.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         selectLocation.setText("Select a Location");
+        selectLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectLocationActionPerformed(evt);
+            }
+        });
 
         addLocation.setFont(new java.awt.Font("Helvetica Neue", 0, 15)); // NOI18N
         addLocation.setText("Add a Location");
@@ -94,6 +101,11 @@ public class LocationPanel extends javax.swing.JPanel {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        locationlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                locationlistMouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(locationlist);
 
@@ -200,8 +212,40 @@ public class LocationPanel extends javax.swing.JPanel {
             //close the main window or exit the application
             Window window = SwingUtilities.getWindowAncestor(this);
             window.dispose(); //closes
+            System.exit(0);
         }
     }//GEN-LAST:event_exit1ActionPerformed
+
+    private void selectLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectLocationActionPerformed
+        // TODO add your handling code here:
+        if(locationToItem != null){
+        JFrame frame = new JFrame("Item Panel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //set the preffered size of window
+        frame.setPreferredSize(new Dimension(850, 690));
+
+        //set minimum size of window
+        frame.setMinimumSize(new Dimension(850, 690));
+        
+        frame.getContentPane().add(new ItemPanel(locationToItem,frame));
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        parentFrame.dispose(); //close panel
+
+        }else{
+        JOptionPane.showMessageDialog(this, "Please Select A Location", "Fail", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_selectLocationActionPerformed
+
+    private void locationlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_locationlistMouseClicked
+        // TODO add your handling code here:
+        String selectedLocation = locationlist.getSelectedValue();
+        System.out.println(selectedLocation);
+        LocationInterface loc = new LocationManagement();
+        locationToItem = loc.loadLocation(selectedLocation);
+    }//GEN-LAST:event_locationlistMouseClicked
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Location Panel");
@@ -213,7 +257,7 @@ public class LocationPanel extends javax.swing.JPanel {
         //set minimum size of window
         frame.setMinimumSize(new Dimension(850, 690));
 
-        frame.getContentPane().add(new ItemPanel(frame));
+        frame.getContentPane().add(new LocationPanel(frame));
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

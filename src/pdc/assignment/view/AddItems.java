@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import pdc.assignment.model.Items;
+import pdc.assignment.model.Locations;
 import pdc.assignment.services.ItemManagement;
 
 /**
@@ -22,11 +23,12 @@ import pdc.assignment.services.ItemManagement;
 public class AddItems extends javax.swing.JPanel {
     
     private JFrame parentFrame;
-    
+    private final Locations location;
     /**
      * Creates new form AddItems
      */
-    public AddItems(JFrame parentFrame) {
+    public AddItems(Locations location,JFrame parentFrame) {
+        this.location = location;
         this.parentFrame = parentFrame;
         initComponents();
         // Set minimum size for the parent frame
@@ -162,7 +164,7 @@ public class AddItems extends javax.swing.JPanel {
         JFrame itemPanelFrame = new JFrame("Item Panel");
         itemPanelFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         itemPanelFrame.setSize(850, 690);
-        itemPanelFrame.add(new ItemPanel(itemPanelFrame));
+        itemPanelFrame.add(new ItemPanel(location,itemPanelFrame));
         itemPanelFrame.setLocationRelativeTo(null); //center the frame
         itemPanelFrame.setVisible(true);
 
@@ -175,6 +177,7 @@ public class AddItems extends javax.swing.JPanel {
         if (isValidInput()) {
             //create an items object with the input values
             Items newItem = new Items();
+            newItem.setLocation(location);
             newItem.setName(addItemName.getText());
             newItem.setQuantity(Integer.parseInt(addItemQuantity.getText())); //assuming quantity is an integer
             newItem.setPrice(Double.parseDouble(addItemPrice.getText())); //assuming price is a double

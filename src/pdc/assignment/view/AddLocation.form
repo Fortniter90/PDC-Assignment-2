@@ -33,9 +33,9 @@
                           </Group>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="addLocationNameLabel" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
-                                  <Component id="addLocationAddressLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="addLocationAddressLabel" max="32767" attributes="0"/>
+                                  <Component id="addLocationNameLabel" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">

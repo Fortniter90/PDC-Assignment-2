@@ -338,5 +338,30 @@ Session session = HibernateUtil.getSession();
         return itemName;
     }
 
+    @Override
+    public List<Items> browseItemsByLocation(Locations location) {
+    Session session = HibernateUtil.getSession();
+        Transaction transaction = null;
+        List<Items> items = null;
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("from Items where location.id =:location");
+            query.setParameter("location", location.getId());
+            items = query.list();
+            for (Items item : items) {
+                System.out.println(item.toString());
+            }
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            logger.info("ERROR Occurs in ItemManagement - browseItems!");
+            e.printStackTrace();
+        }
+        return items;
+    }
+
 
 }

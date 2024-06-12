@@ -9,6 +9,7 @@ import java.awt.Window;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import pdc.assignment.model.Locations;
 
 
 /**
@@ -18,11 +19,15 @@ import javax.swing.SwingUtilities;
 public class ItemPanel extends javax.swing.JPanel {
     
     private JFrame parentFrame;
+    private Locations location;
     
     /**
      * Creates new form ItemPanel
+     * @param location
+     * @param parentFrame
      */
-    public ItemPanel(JFrame parentFrame) {
+    public ItemPanel(Locations location,JFrame parentFrame) {
+        this.location = location;
         this.parentFrame = parentFrame;
         initComponents();
     }
@@ -177,7 +182,7 @@ public class ItemPanel extends javax.swing.JPanel {
         JFrame addItemFrame = new JFrame("Add new item");
         addItemFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addItemFrame.setSize(850, 690);
-        addItemFrame.add(new AddItems(addItemFrame));
+        addItemFrame.add(new AddItems(location,addItemFrame));
         addItemFrame.setLocationRelativeTo(null); //center the frame
         addItemFrame.setVisible(true);      
           
@@ -203,7 +208,7 @@ public class ItemPanel extends javax.swing.JPanel {
         JFrame removeItemFrame = new JFrame("Remove an item");
         removeItemFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         removeItemFrame.setSize(850, 690);
-        removeItemFrame.add(new RemoveItem(removeItemFrame));
+        removeItemFrame.add(new RemoveItem(location,removeItemFrame));
         removeItemFrame.setLocationRelativeTo(null); //center the frame
         removeItemFrame.setVisible(true);      
           
@@ -229,7 +234,7 @@ public class ItemPanel extends javax.swing.JPanel {
         JFrame displayItemFrame = new JFrame("List of all items");
         displayItemFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         displayItemFrame.setSize(850, 690);
-        displayItemFrame.add(new DisplayItems(displayItemFrame));
+        displayItemFrame.add(new DisplayItems(location,displayItemFrame));
         displayItemFrame.setLocationRelativeTo(null); //center the frame
         displayItemFrame.setVisible(true);      
           
@@ -290,22 +295,6 @@ public class ItemPanel extends javax.swing.JPanel {
         parentFrame.dispose(); // close panel
     }//GEN-LAST:event_displayTransfersActionPerformed
     
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Item Panel");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        //set the preffered size of window
-        frame.setPreferredSize(new Dimension(850, 690));
-    
-        //set minimum size of window
-        frame.setMinimumSize(new Dimension(850, 690));
-
-        frame.getContentPane().add(new ItemPanel(frame));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addItem;

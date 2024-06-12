@@ -31,11 +31,12 @@ public class TransferManagement extends BaseLog implements TransferInterface {
             Items item = transfer.getItem();
             Items loadedItem = (Items) session.get(Items.class, item.getId());
             if (loadedItem != null) {
-                loadedItem.setQuantity(transfer.getQuantity() - item.getQuantity());
+                loadedItem.setQuantity(item.getQuantity() - transfer.getQuantity());
                 session.update(loadedItem);
 
                 ItemInterface it = new ItemManagement();
-                Items it1 = new Items(item.getName(), item.getPrice(), item.getQuantity(), transfer.getDestLocation());
+                Items it1;
+                it1 = new Items(item.getName(), item.getPrice(), item.getQuantity(), transfer.getDestLocation());
                 boolean work = it.transferAddItem(session, it1);
                 if (false == work) {
                     Items loadedItem2 = it.itemTransferLoad(session, item.getName(), transfer.getDestLocation());
