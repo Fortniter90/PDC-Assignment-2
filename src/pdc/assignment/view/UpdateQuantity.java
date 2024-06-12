@@ -222,9 +222,9 @@ public class UpdateQuantity extends javax.swing.JPanel {
             boolean updated = it.updateQuantity(item, (Integer.parseInt(updateQuantityBox.getText())));
 
             if (updated) {
-                JOptionPane.showMessageDialog(this, "Item transfered successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Item updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(this, "Failed to transfer item.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Failed to updated item.", "Error", JOptionPane.ERROR_MESSAGE);
             }
             }else{
               JOptionPane.showMessageDialog(this, "Invalid input, try again", "Error", JOptionPane.ERROR_MESSAGE);

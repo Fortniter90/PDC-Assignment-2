@@ -23,9 +23,9 @@ public class SearchItems extends javax.swing.JPanel {
     /**
      * Creates new form SearchItems
      */
-    public SearchItems(Locations location,JFrame parentFrame) {
-        this.location = location;
+    public SearchItems(Locations location, JFrame parentFrame) {
         this.parentFrame = parentFrame;
+        this.location = location;
         initComponents();
                 
         parentFrame.setMinimumSize(new Dimension(850, 690));
@@ -171,10 +171,10 @@ public class SearchItems extends javax.swing.JPanel {
     private void searchByQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByQuantityActionPerformed
         // TODO add your handling code here:
                 
-        JFrame searchByQuantityFrame = new JFrame("Add new item");
+        JFrame searchByQuantityFrame = new JFrame("Search by Quantity");
         searchByQuantityFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         searchByQuantityFrame.setSize(850, 690);
-        searchByQuantityFrame.add(new SearchByQuantity(location,searchByQuantityFrame));
+        searchByQuantityFrame.add(new SearchByQuantity(location, searchByQuantityFrame));
         searchByQuantityFrame.setLocationRelativeTo(null); //center the frame
         searchByQuantityFrame.setVisible(true);      
           
@@ -184,7 +184,7 @@ public class SearchItems extends javax.swing.JPanel {
     private void searchByPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByPriceActionPerformed
         // TODO add your handling code here:
                 
-        JFrame searchByPriceFrame = new JFrame("Add new item");
+        JFrame searchByPriceFrame = new JFrame("Search by Price");
         searchByPriceFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         searchByPriceFrame.setSize(850, 690);
         searchByPriceFrame.add(new SearchByPrice(location, searchByPriceFrame));
@@ -197,10 +197,10 @@ public class SearchItems extends javax.swing.JPanel {
     private void searchByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByNameActionPerformed
         // TODO add your handling code here:
                 
-        JFrame searchByNameFrame = new JFrame("Add new item");
+        JFrame searchByNameFrame = new JFrame("Search by Name");
         searchByNameFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         searchByNameFrame.setSize(850, 690);
-        searchByNameFrame.add(new SearchByName(location,searchByNameFrame));
+        searchByNameFrame.add(new SearchByName(location, searchByNameFrame));
         searchByNameFrame.setLocationRelativeTo(null); //center the frame
         searchByNameFrame.setVisible(true);      
           

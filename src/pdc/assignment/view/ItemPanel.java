@@ -19,7 +19,7 @@ import pdc.assignment.model.Locations;
 public class ItemPanel extends javax.swing.JPanel {
     
     private JFrame parentFrame;
-    private Locations location;
+    private final Locations location;
     
     /**
      * Creates new form ItemPanel
@@ -247,7 +247,7 @@ public class ItemPanel extends javax.swing.JPanel {
         JFrame searchItemFrame = new JFrame("Search for an item");
         searchItemFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         searchItemFrame.setSize(850, 690);
-        searchItemFrame.add(new SearchItems(location,searchItemFrame));
+        searchItemFrame.add(new SearchItems(location, searchItemFrame));
         searchItemFrame.setLocationRelativeTo(null); //center the frame
         searchItemFrame.setVisible(true);      
           
@@ -273,10 +273,10 @@ public class ItemPanel extends javax.swing.JPanel {
     private void updateQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateQuantityActionPerformed
         // TODO add your handling code here:
         
-        JFrame updateQuantityFrame = new JFrame("Search for an item");
+        JFrame updateQuantityFrame = new JFrame("Update quantity of items");
         updateQuantityFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         updateQuantityFrame.setSize(850, 690);
-        updateQuantityFrame.add(new UpdateQuantity(location,updateQuantityFrame));
+        updateQuantityFrame.add(new UpdateQuantity(location, updateQuantityFrame));
         updateQuantityFrame.setLocationRelativeTo(null); //center the frame
         updateQuantityFrame.setVisible(true);      
           
@@ -286,7 +286,7 @@ public class ItemPanel extends javax.swing.JPanel {
     private void displayTransfersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayTransfersActionPerformed
         // TODO add your handling code here:
                 
-        JFrame displayTransfersFrame = new JFrame("Search for an item");
+        JFrame displayTransfersFrame = new JFrame("Display of transfers done");
         displayTransfersFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         displayTransfersFrame.setSize(850, 690);
         displayTransfersFrame.add(new DisplayTransfers(location,displayTransfersFrame));

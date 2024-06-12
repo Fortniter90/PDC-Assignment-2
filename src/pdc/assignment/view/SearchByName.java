@@ -25,12 +25,14 @@ public class SearchByName extends javax.swing.JPanel {
     
     private final Locations location;
     private JFrame parentFrame;
+    private final Locations location;
     /**
      * Creates new form SearchByName
      */
     public SearchByName(Locations location,JFrame parentFrame) {
         this.location = location;
         this.parentFrame = parentFrame;
+        this.location = location;
         initComponents();
         
         loadItemsIntoList();
