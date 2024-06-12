@@ -25,14 +25,12 @@ import pdc.assignment.services.ItemManagement;
 public class SearchByPrice extends javax.swing.JPanel {
     private final Locations location;
     private JFrame parentFrame;
-    private final Locations location;    
     /**
      * Creates new form SearchByPrice
      */
     public SearchByPrice(Locations location,JFrame parentFrame) {
         this.location = location;
         this.parentFrame = parentFrame;
-        this.location = location;
         initComponents();
                         
         parentFrame.setMinimumSize(new Dimension(850, 690));
@@ -51,7 +49,7 @@ public class SearchByPrice extends javax.swing.JPanel {
     
     private void loadItemsByPrice(double price) {
         ItemManagement itemManagement = new ItemManagement();
-        List<Items> items = itemManagement.searchItemByPrice(price);
+        List<Items> items = itemManagement.searchItemByPrice(price,location);
         if (items != null && !items.isEmpty()) {
             DefaultListModel<String> listModel = new DefaultListModel<>();
             for (Items item : items) {

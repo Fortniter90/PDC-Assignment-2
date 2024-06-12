@@ -159,18 +159,19 @@ public class ItemManagement extends BaseLog implements ItemInterface {
     }
 
     @Override
-    public List<Items> searchItemByName(String name) {
+    public List<Items> searchItemByName(String name, Locations location) {
          Session session = HibernateUtil.getSession();
         Transaction transaction = null;
         List<Items> items = null;
         try {
             transaction = session.beginTransaction();
-            Query query = session.createQuery("FROM Items where name=:name");
+            Query query = session.createQuery("FROM Items where location.id=:location and name=:name");
+            query.setParameter("location", location.getId());
             query.setParameter("name", name);
             items = query.list();
             if(!items.isEmpty()){
             for (Items item : items) {
-                Locations location = item.getLocation();
+                Locations locations = item.getLocation();
                 System.out.println(item.toString() + ", Location: " + location.getName());
 
             }
@@ -201,7 +202,7 @@ Session session = HibernateUtil.getSession();
             if(!items.isEmpty()){
             for (Items item : items) {
                 Locations locations = item.getLocation();
-                System.out.println(item.toString() + ", Location: " + location.getName());
+                System.out.println(item.toString() + ", Location: " + locations.getName());
 
             }
             transaction.commit();
@@ -218,19 +219,20 @@ Session session = HibernateUtil.getSession();
     }
 
     @Override
-    public List<Items> searchItemByPrice(double price) {
+    public List<Items> searchItemByPrice(double price, Locations location) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = null;
         List<Items> items = null;
         try {
             transaction = session.beginTransaction();
-            Query query = session.createQuery("FROM Items where price=:price");
+            Query query = session.createQuery("FROM Items where location.id=:location and price=:price");
+            query.setParameter("location", location.getId());
             query.setParameter("price", price);
             items = query.list();
             if(!items.isEmpty()){
             for (Items item : items) {
-                Locations location = item.getLocation();
-                System.out.println(item.toString() + ", Location: " + location.getName());
+                Locations locations = item.getLocation();
+                System.out.println(item.toString() + ", Location: " + locations.getName());
 
             }
             transaction.commit();
