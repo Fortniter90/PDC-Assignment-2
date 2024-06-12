@@ -28,6 +28,7 @@ public class LocationManagement extends BaseLog implements LocationInterface {
             transaction = session.beginTransaction();
             Query query = session.createQuery("FROM Locations where name=:name");
             query.setParameter("name", location.getName());
+            query.setParameter("address", location.getAddress());
 
             if (query.uniqueResult() == null) {
                 session.save(location);

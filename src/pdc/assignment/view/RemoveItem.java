@@ -12,18 +12,23 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import pdc.assignment.model.Items;
+import pdc.assignment.services.ItemManagement;
+
 /**
  *
- * @author kmann
+ * @author klinsmann
  */
 public class RemoveItem extends javax.swing.JPanel {
 
     private JFrame parentFrame;
+    private ItemManagement itemManagement;
     /**
      * Creates new form RemoveItem
      */
     public RemoveItem(JFrame parentFrame) {
         this.parentFrame = parentFrame;
+        this.itemManagement = new ItemManagement();
         initComponents();
         
         parentFrame.setMinimumSize(new Dimension(850, 690));
@@ -38,6 +43,8 @@ public class RemoveItem extends javax.swing.JPanel {
                 }
             }
         });
+        
+        
     }
 
     /**
@@ -55,6 +62,8 @@ public class RemoveItem extends javax.swing.JPanel {
         removeItemConfirm = new javax.swing.JButton();
         exit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        removeItemQuantity = new javax.swing.JTextField();
 
         removeItemLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         removeItemLabel.setText("Select an item to remove");
@@ -90,30 +99,44 @@ public class RemoveItem extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("What item do you want to remove?");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Quantity to remove:");
+
+        removeItemQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeItemQuantityActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(217, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(exit)
-                        .addGap(25, 25, 25))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(removeItemBack)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(removeItemConfirm))
-                            .addComponent(removeItemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
-                        .addComponent(removeItemDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(232, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(217, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(exit)
+                        .addGap(25, 25, 25))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(removeItemBack)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(removeItemConfirm))
+                                .addComponent(removeItemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2))
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(removeItemDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(removeItemQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(232, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,12 +146,16 @@ public class RemoveItem extends javax.swing.JPanel {
                 .addGap(82, 82, 82)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(removeItemLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(removeItemDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(91, 91, 91)
+                    .addComponent(removeItemDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(removeItemQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(removeItemBack)
                     .addComponent(removeItemConfirm))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 266, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 220, Short.MAX_VALUE)
                 .addComponent(exit)
                 .addGap(25, 25, 25))
         );
@@ -153,23 +180,29 @@ public class RemoveItem extends javax.swing.JPanel {
 
     private void removeItemConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeItemConfirmActionPerformed
         // TODO add your handling code here:
-        String selectedItem = (String) removeItemDropdown.getSelectedItem();
+            // Get the selected item name from the dropdown menu
+            String itemName = (String) removeItemDropdown.getSelectedItem();
 
-        if (selectedItem != null && !selectedItem.isEmpty()) {
-            // Remove the selected item from your system or database
-            boolean removalSuccessful = removeItem(selectedItem); // Call a method to remove the item
+            // Get the quantity to remove from the text field
+            String quantityStr = removeItemQuantity.getText();
+            if (!quantityStr.isEmpty()) {
+                try {
+                    int quantityToRemove = Integer.parseInt(quantityStr);
 
-            if (removalSuccessful) {
-                // Show a success message
-                JOptionPane.showMessageDialog(this, "Item removed successfully!");
+                    // Call removeItemByName method from ItemManagement
+                    boolean removed = itemManagement.removeItemByName(itemName, quantityToRemove);
+
+                    if (removed) {
+                        JOptionPane.showMessageDialog(this, "Quantity removed successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Failed to remove quantity.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(this, "Invalid quantity input.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                // Show a failure message
-                JOptionPane.showMessageDialog(this, "Failed to remove item. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter a quantity to remove.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } else {
-            // Show an error message if no item is selected
-            JOptionPane.showMessageDialog(this, "Please select an item to remove.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
     }//GEN-LAST:event_removeItemConfirmActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
@@ -187,13 +220,19 @@ public class RemoveItem extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_exitActionPerformed
 
+    private void removeItemQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeItemQuantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_removeItemQuantityActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exit;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton removeItemBack;
     private javax.swing.JButton removeItemConfirm;
     private javax.swing.JComboBox<String> removeItemDropdown;
     private javax.swing.JLabel removeItemLabel;
+    private javax.swing.JTextField removeItemQuantity;
     // End of variables declaration//GEN-END:variables
 }

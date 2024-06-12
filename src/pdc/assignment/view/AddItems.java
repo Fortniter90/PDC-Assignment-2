@@ -12,6 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import pdc.assignment.model.Items;
+import pdc.assignment.services.ItemManagement;
+
 /**
  *
  * @author dhy6184
@@ -19,6 +22,7 @@ import javax.swing.SwingUtilities;
 public class AddItems extends javax.swing.JPanel {
     
     private JFrame parentFrame;
+    
     /**
      * Creates new form AddItems
      */
@@ -185,8 +189,23 @@ public class AddItems extends javax.swing.JPanel {
         // TODO add your handling code here:
         //if input valid
         if (isValidInput()) {
-            JOptionPane.showMessageDialog(this, "Item added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            //if invalid
+            //create an items object with the input values
+            Items newItem = new Items();
+            newItem.setName(addItemName.getText());
+            newItem.setQuantity(Integer.parseInt(addItemQuantity.getText())); //assuming quantity is an integer
+            newItem.setPrice(Double.parseDouble(addItemPrice.getText())); //assuming price is a double
+            newItem.setCategory(addItemCategory.getText());
+
+            ItemManagement itemManagement = new ItemManagement(); //adjust this as per your class structure
+
+            // Call the addItem method from ItemManagement
+            boolean added = itemManagement.addItem(newItem);
+
+            if (added) {
+                JOptionPane.showMessageDialog(this, "Item added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to add item.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Invalid input, try again.", "Error", JOptionPane.ERROR_MESSAGE);
         }

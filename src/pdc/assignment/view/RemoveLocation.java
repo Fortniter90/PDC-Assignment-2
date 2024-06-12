@@ -8,22 +8,28 @@ import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import pdc.assignment.model.Locations;
+import pdc.assignment.services.LocationManagement;
+
 /**
  *
- * @author kmann
+ * @author klinsmann
  */
 public class RemoveLocation extends javax.swing.JPanel {
 
     private JFrame parentFrame;
+    private LocationManagement locationManagement;
     /**
      * Creates new form RemoveLocation
      */
     public RemoveLocation(JFrame parentFrame) {
         this.parentFrame = parentFrame;
+        this.locationManagement = new LocationManagement();
         initComponents();
         
         parentFrame.setMinimumSize(new Dimension(850, 690));
@@ -38,6 +44,18 @@ public class RemoveLocation extends javax.swing.JPanel {
                 }
             }
         });
+        
+        loadLocations(); //load location to dropdown menu
+    }
+    
+        private void loadLocations() {
+        //populate removeLocationDropdown with actual location names from database
+        List<Locations> locations = locationManagement.browseLocations();
+        if (locations != null) {
+            for (Locations location : locations) {
+                removeLocationDropdown.addItem(location.getName());
+            }
+        }
     }
 
     /**
@@ -152,25 +170,28 @@ public class RemoveLocation extends javax.swing.JPanel {
 
     private void removeLocationConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeLocationConfirmActionPerformed
         // TODO add your handling code here:
-        String selectedItem = (String) removeLocationDropdown.getSelectedItem();
+        String selectedLocationName = (String) removeLocationDropdown.getSelectedItem();
 
-        if (selectedItem != null && !selectedItem.isEmpty()) {
-            // Remove the selected item from your system or database
-            boolean removalSuccessful = deleteLocation(selectedItem); // Call a method to remove the item
+            if (selectedLocationName != null && !selectedLocationName.isEmpty()) {
+                Locations location = locationManagement.loadLocation(selectedLocationName);
+                if (location != null) {
+                    boolean removalSuccessful = locationManagement.deleteLocation(location); // Call a method to remove the item
 
-            if (removalSuccessful) {
-                // Show a success message
-                JOptionPane.showMessageDialog(this, "Location removed successfully!");
-            } else {
-                // Show a failure message
-                JOptionPane.showMessageDialog(this, "Failed to remove Location. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            // Show an error message if no item is selected
-            JOptionPane.showMessageDialog(this, "Please select an item to remove.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+                    if (removalSuccessful) {
+                        // Show a success message
+                        JOptionPane.showMessageDialog(this, "Location removed successfully!");
+                    } else {
+                        // Show a failure message
+                        JOptionPane.showMessageDialog(this, "Failed to remove Location. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    // Show an error message if no item is selected
+                    JOptionPane.showMessageDialog(this, "Please select an item to remove.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }     
     }//GEN-LAST:event_removeLocationConfirmActionPerformed
 
+    
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
         int confirmed = JOptionPane.showConfirmDialog(null,

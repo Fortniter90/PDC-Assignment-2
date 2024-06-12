@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import pdc.assignment.model.Locations;
+import pdc.assignment.services.LocationManagement;
 /**
  *
  * @author dhy6184
@@ -19,11 +21,13 @@ import javax.swing.SwingUtilities;
 public class AddLocation extends javax.swing.JPanel {
     
     private JFrame parentFrame;
-    
+    private LocationManagement locationManagement;
+
     /**
      * Creates new form AddLocation
      */
     public AddLocation(JFrame parentFrame) {
+        this.locationManagement = new LocationManagement();
         this.parentFrame = parentFrame;
         initComponents();
         // Set minimum size for the parent frame
@@ -51,11 +55,13 @@ public class AddLocation extends javax.swing.JPanel {
     private void initComponents() {
 
         addLocationName = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        addLocationNameLabel = new javax.swing.JLabel();
         addLocationConfirm = new javax.swing.JButton();
         addLocationBack = new javax.swing.JButton();
         exit = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        addLocationAddressLabel = new javax.swing.JLabel();
+        addLocationAddress = new javax.swing.JTextField();
 
         addLocationName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,7 +69,8 @@ public class AddLocation extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Location Name");
+        addLocationNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addLocationNameLabel.setText("Location Name:");
 
         addLocationConfirm.setText("Confirm");
         addLocationConfirm.addActionListener(new java.awt.event.ActionListener() {
@@ -89,31 +96,42 @@ public class AddLocation extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("What is the name of the location you want to add?");
 
+        addLocationAddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addLocationAddressLabel.setText("Location Address:");
+
+        addLocationAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addLocationAddressActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(250, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(207, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(exit)
+                        .addGap(24, 24, 24))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(addLocationName, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(addLocationBack)
-                        .addGap(195, 195, 195)
-                        .addComponent(addLocationConfirm)))
-                .addContainerGap(258, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(exit)
-                .addGap(24, 24, 24))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(addLocationBack)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(addLocationConfirm))
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addLocationNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addLocationAddressLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(addLocationAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                                    .addComponent(addLocationName))))
+                        .addContainerGap(213, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,12 +141,16 @@ public class AddLocation extends javax.swing.JPanel {
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addLocationName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(76, 76, 76)
+                    .addComponent(addLocationNameLabel))
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addLocationConfirm)
-                    .addComponent(addLocationBack))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
+                    .addComponent(addLocationAddressLabel)
+                    .addComponent(addLocationAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addLocationBack)
+                    .addComponent(addLocationConfirm))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
                 .addComponent(exit)
                 .addGap(24, 24, 24))
         );
@@ -141,19 +163,26 @@ public class AddLocation extends javax.swing.JPanel {
 
     private void addLocationConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLocationConfirmActionPerformed
         // TODO add your handling code here:
-        //if input valid
-        if (isValidInput()) {
-            JOptionPane.showMessageDialog(this, "Location added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            //if invalid
+        String name = addLocationName.getText().trim();
+        String address = addLocationAddress.getText().trim();
+
+        // Check if both name and address are not empty
+        if (!name.isEmpty() && !address.isEmpty()) {
+            Locations location = new Locations();
+            location.setName(name);
+            location.setAddress(address); // Set the address
+
+            boolean added = locationManagement.addLocation(location);
+            if (added) {
+                JOptionPane.showMessageDialog(this, "Location added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to add location. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Invalid input, try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please enter both name and address for the location.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_addLocationConfirmActionPerformed
 
-    private boolean isValidInput() {
-        return !addLocationName.getText().isEmpty();
-        
-    }
     
     private void addLocationBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLocationBackActionPerformed
         // TODO add your handling code here:
@@ -183,13 +212,19 @@ public class AddLocation extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_exitActionPerformed
 
+    private void addLocationAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addLocationAddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addLocationAddressActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField addLocationAddress;
+    private javax.swing.JLabel addLocationAddressLabel;
     private javax.swing.JButton addLocationBack;
     private javax.swing.JButton addLocationConfirm;
     private javax.swing.JTextField addLocationName;
+    private javax.swing.JLabel addLocationNameLabel;
     private javax.swing.JButton exit;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

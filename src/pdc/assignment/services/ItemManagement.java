@@ -96,6 +96,69 @@ public class ItemManagement extends BaseLog implements ItemInterface {
         }
         return status;
     }
+    
+    public boolean removeItemByName(String itemName, int quantityToRemove) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = null;
+        boolean removed = false;
+        try {
+            transaction = session.beginTransaction();
+            // Query the database to find the item by name
+            Query query = session.createQuery("FROM Items WHERE name = :itemName");
+            query.setParameter("itemName", itemName);
+            Items itemToRemove = (Items) query.uniqueResult();
+            if (itemToRemove != null) {
+                // Update the quantity
+                int newQuantity = itemToRemove.getQuantity() - quantityToRemove;
+                if (newQuantity >= 0) { // Ensure quantity doesn't go negative
+                    itemToRemove.setQuantity(newQuantity);
+                    session.update(itemToRemove); // Update the item in the database
+                    transaction.commit();
+                    removed = true;
+                } else {
+                    transaction.rollback(); // Quantity cannot go negative
+                }
+            }
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            logger.info("ERROR Occurs in ItemManagement - removeItemByName!");
+            e.printStackTrace();
+        }
+        return removed;
+    }
+    
+    public boolean reduceItemQuantity(Items item, int quantityToRemove) {
+        Session session = HibernateUtil.getSession();
+        Transaction transaction = null;
+        boolean status = false;
+        try {
+            transaction = session.beginTransaction();
+            Items loadedItem = (Items) session.get(Items.class, item.getId());
+            if (loadedItem != null) {
+                int currentQuantity = loadedItem.getQuantity();
+                if (currentQuantity >= quantityToRemove) {
+                    loadedItem.setQuantity(currentQuantity - quantityToRemove);
+                    session.update(loadedItem);
+                    transaction.commit();
+                    status = true;
+                } else {
+                    // Not enough quantity available to remove
+                    transaction.rollback();
+                }
+            }
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            logger.info("ERROR Occurs in ItemManagement - reduceItemQuantity!");
+            e.printStackTrace();
+        } finally {
+            session.close(); // Close the session
+        }
+        return status;
+    }
 
     @Override
     public boolean updateQuantity(Items item, int amount) {
