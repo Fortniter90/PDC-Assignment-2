@@ -92,11 +92,11 @@ public class TestCases {
           Items item3 = new Items("Item3", 14.40, 20, location);
           itemService.addItem(item3);
           
-          assertNotNull(itemService.searchItemByName("Item1"));
-          assertNotNull(itemService.searchItemByName("Item2"));
+          assertNotNull(itemService.searchItemByName("Item1",location));
+          assertNotNull(itemService.searchItemByName("Item2",location));
           
-          assertNotNull(itemService.searchItemByPrice(14.40));
-          assertNotNull(itemService.searchItemByPrice(14.80));
+          assertNotNull(itemService.searchItemByPrice(14.40,location));
+          assertNotNull(itemService.searchItemByPrice(14.80,location));
           
           assertNotNull(itemService.searchItemByQuantity(20,location));
           assertNotNull(itemService.searchItemByQuantity(30,location));
