@@ -185,7 +185,7 @@ public class SearchItems extends javax.swing.JPanel {
         return !searchItemName.getText().isEmpty() && 
                !searchQuantity.getText().isEmpty(); //&& 
                //!addItemPrice.getText().isEmpty() &&
-               //!addItemCategory.getText().isEmpty();
+
         
     }
     
