@@ -11,18 +11,20 @@ import java.awt.event.ComponentEvent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import pdc.assignment.model.Locations;
 
 /**
  *
  * @author klinsmann
  */
 public class SearchItems extends javax.swing.JPanel {
-
+    private final Locations location;
     private JFrame parentFrame;
     /**
      * Creates new form SearchItems
      */
-    public SearchItems(JFrame parentFrame) {
+    public SearchItems(Locations location,JFrame parentFrame) {
+        this.location = location;
         this.parentFrame = parentFrame;
         initComponents();
                 
@@ -142,21 +144,13 @@ public class SearchItems extends javax.swing.JPanel {
         JFrame itemPanelFrame = new JFrame("Item Panel");
         itemPanelFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         itemPanelFrame.setSize(850, 690);
-        itemPanelFrame.add(new ItemPanel(itemPanelFrame));
+        itemPanelFrame.add(new ItemPanel(location,itemPanelFrame));
         itemPanelFrame.setLocationRelativeTo(null); //center the frame
         itemPanelFrame.setVisible(true);
 
         parentFrame.dispose(); //close panel
     }//GEN-LAST:event_searchItemBackActionPerformed
 
-
-    private boolean isValidInput() {
-        return !searchItemName.getText().isEmpty() && 
-               !searchQuantity.getText().isEmpty(); //&& 
-               //!addItemPrice.getText().isEmpty() &&
-
-        
-    }
     
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
@@ -170,6 +164,7 @@ public class SearchItems extends javax.swing.JPanel {
             //close the main window or exit the application
             Window window = SwingUtilities.getWindowAncestor(this);
             window.dispose(); //closes
+            System.exit(0);
         }
     }//GEN-LAST:event_exitActionPerformed
 
@@ -179,7 +174,7 @@ public class SearchItems extends javax.swing.JPanel {
         JFrame searchByQuantityFrame = new JFrame("Add new item");
         searchByQuantityFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         searchByQuantityFrame.setSize(850, 690);
-        searchByQuantityFrame.add(new SearchByQuantity(searchByQuantityFrame));
+        searchByQuantityFrame.add(new SearchByQuantity(location,searchByQuantityFrame));
         searchByQuantityFrame.setLocationRelativeTo(null); //center the frame
         searchByQuantityFrame.setVisible(true);      
           
@@ -192,7 +187,7 @@ public class SearchItems extends javax.swing.JPanel {
         JFrame searchByPriceFrame = new JFrame("Add new item");
         searchByPriceFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         searchByPriceFrame.setSize(850, 690);
-        searchByPriceFrame.add(new SearchByPrice(searchByPriceFrame));
+        searchByPriceFrame.add(new SearchByPrice(location, searchByPriceFrame));
         searchByPriceFrame.setLocationRelativeTo(null); //center the frame
         searchByPriceFrame.setVisible(true);      
           
@@ -205,7 +200,7 @@ public class SearchItems extends javax.swing.JPanel {
         JFrame searchByNameFrame = new JFrame("Add new item");
         searchByNameFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         searchByNameFrame.setSize(850, 690);
-        searchByNameFrame.add(new SearchByName(searchByNameFrame));
+        searchByNameFrame.add(new SearchByName(location,searchByNameFrame));
         searchByNameFrame.setLocationRelativeTo(null); //center the frame
         searchByNameFrame.setVisible(true);      
           

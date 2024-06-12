@@ -87,7 +87,7 @@ public class ItemPanel extends javax.swing.JPanel {
         });
 
         transferItems.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        transferItems.setText("Tranfer Item");
+        transferItems.setText("Transfer Item");
         transferItems.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 transferItemsActionPerformed(evt);
@@ -247,7 +247,7 @@ public class ItemPanel extends javax.swing.JPanel {
         JFrame searchItemFrame = new JFrame("Search for an item");
         searchItemFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         searchItemFrame.setSize(850, 690);
-        searchItemFrame.add(new SearchItems(searchItemFrame));
+        searchItemFrame.add(new SearchItems(location,searchItemFrame));
         searchItemFrame.setLocationRelativeTo(null); //center the frame
         searchItemFrame.setVisible(true);      
           
@@ -276,7 +276,7 @@ public class ItemPanel extends javax.swing.JPanel {
         JFrame updateQuantityFrame = new JFrame("Search for an item");
         updateQuantityFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         updateQuantityFrame.setSize(850, 690);
-        updateQuantityFrame.add(new UpdateQuantity(updateQuantityFrame));
+        updateQuantityFrame.add(new UpdateQuantity(location,updateQuantityFrame));
         updateQuantityFrame.setLocationRelativeTo(null); //center the frame
         updateQuantityFrame.setVisible(true);      
           

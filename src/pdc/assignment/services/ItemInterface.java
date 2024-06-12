@@ -27,10 +27,8 @@ public interface ItemInterface {
     
     public List<Items> searchItemByName(String name);
     
-    public List<Items> searchItemByQuantity(int quantity);
-    
-    public List<Items> searchItemByCategory(String category);
-    
+    public List<Items> searchItemByQuantity(int quantity, Locations location);
+       
     public List<Items> searchItemByPrice(double price);
     
     public Items itemTransferLoad(Session session, String item, Locations destLocation);

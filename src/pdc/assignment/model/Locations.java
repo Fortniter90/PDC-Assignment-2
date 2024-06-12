@@ -64,4 +64,9 @@ public class Locations implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
+    
+    @Override
+    public String toString(){
+        return "Name: " + getName() + ", Address: " + getAddress(); 
+    }
 }

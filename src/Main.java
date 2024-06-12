@@ -4,6 +4,7 @@
  */
 
 
+import java.awt.Dimension;
 import pdc.assignment.model.Items;
 import pdc.assignment.services.ItemInterface;
 import pdc.assignment.services.ItemManagement;
@@ -11,12 +12,14 @@ import pdc.assignment.model.Locations;
 import pdc.assignment.services.LocationInterface;
 import pdc.assignment.services.LocationManagement;
 import java.util.List;
+import javax.swing.JFrame;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import pdc.assignment.model.Transfer;
 import pdc.assignment.pkg2.HibernateUtil;
 import pdc.assignment.services.TransferInterface;
 import pdc.assignment.services.TransferManagement;
+import pdc.assignment.view.LocationPanel;
 
 /**
  *
@@ -25,50 +28,19 @@ import pdc.assignment.services.TransferManagement;
 public class Main {
 
     public static void main(String[] args) {
+    JFrame frame = new JFrame("Location Panel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        ItemInterface it = new ItemManagement();
-        LocationInterface loc = new LocationManagement();
-        TransferInterface tran = new TransferManagement();
-        
-     //   Locations lo1 = new Locations("Peppe Palaece", "10 road");
-        
-        
-     //  loc.addLocation(lo1);
-      //  it.addItem(it1);
- //       it.updateQuantity(it1, 20);
-       // loc.browseLocations();
-    //  Locations locc2 = loc.loadLocation("Pepe Palalce");
-     // Items it1 = new Items("pep1", 20.16, 10, locc2);
-    // loc.addLocation(lo1);
-      //      it.addItem(it1);
+        //set the preffered size of window
+        frame.setPreferredSize(new Dimension(850, 690));
 
-    //   loc.browseLocations(); 
-    //   Items itt1 = it.itemLoad("Womp", locc2);
-   //    Locations locc3 = loc.loadLocation("Peppe Palaece2");
-       
-//       Transfer trans = new Transfer(itt1,locc2,locc3,1);
-       
-   //   tran.transferItem(trans);
-       
-     // it.deleteItem(itt1);
-    
-    // loc.deleteLocation(locc2);
-   //    loc.deleteLocation(locc3);
-        loc.browseLocations();
-       
-        it.browseItems();
-        tran.browseTransfers();
-       
-       
-        
-   // it.searchItemByName("pep1");
-   // it.searchItemByPrice(20.16);
-       // it.searchItemByQuantity(10);
-      // it.searchItemByCategory("Weird");
-      
-      
-     
-        
+        //set minimum size of window
+        frame.setMinimumSize(new Dimension(850, 690));
+
+        frame.getContentPane().add(new LocationPanel(frame));
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
         HibernateUtil.shutdown();
         
     }

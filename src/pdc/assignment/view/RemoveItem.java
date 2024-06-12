@@ -83,7 +83,6 @@ public class RemoveItem extends javax.swing.JPanel {
         removeItemLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         removeItemLabel.setText("Select an item to remove");
 
-        removeItemDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         removeItemDropdown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removeItemDropdownActionPerformed(evt);

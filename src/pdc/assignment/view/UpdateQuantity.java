@@ -8,21 +8,32 @@ import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import pdc.assignment.model.Items;
+import pdc.assignment.model.Locations;
+import pdc.assignment.model.Transfer;
+import pdc.assignment.services.ItemInterface;
+import pdc.assignment.services.ItemManagement;
+import pdc.assignment.services.LocationInterface;
+import pdc.assignment.services.LocationManagement;
+import pdc.assignment.services.TransferInterface;
+import pdc.assignment.services.TransferManagement;
 
 /**
  *
  * @author kmann
  */
 public class UpdateQuantity extends javax.swing.JPanel {
-
+    private final Locations location;
     private JFrame parentFrame;
     /**
      * Creates new form UpdateQuantity
      */
-    public UpdateQuantity(JFrame parentFrame) {
+    public UpdateQuantity(Locations location, JFrame parentFrame) {
+        this.location = location;
         this.parentFrame = parentFrame;
         initComponents();
         
@@ -37,7 +48,19 @@ public class UpdateQuantity extends javax.swing.JPanel {
                     parentFrame.setSize(Math.max(width, 850), Math.max(height, 690));
                 }
             }
-        });        
+        });
+        loadItems();
+    }
+    
+     private void loadItems() {
+         ItemInterface it = new ItemManagement();
+        //populate removeItemsDropdown
+        List<Items> items = it.browseItemsByLocation(location);
+        if (items != null) {
+            for (Items item : items) {
+                updateQuantityItem.addItem(item.getName());
+            }
+        }
     }
 
     /**
@@ -61,7 +84,6 @@ public class UpdateQuantity extends javax.swing.JPanel {
         updateQuantityNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         updateQuantityNameLabel.setText("Select which item:");
 
-        updateQuantityItem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         updateQuantityItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateQuantityItemActionPerformed(evt);
@@ -117,7 +139,7 @@ public class UpdateQuantity extends javax.swing.JPanel {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(updateQuantityBack)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(updateQuantityConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(updateQuantityConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(updateQuantityNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,7 +188,7 @@ public class UpdateQuantity extends javax.swing.JPanel {
         JFrame itemPanelFrame = new JFrame("Item Panel");
         itemPanelFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         itemPanelFrame.setSize(850, 690);
-        itemPanelFrame.add(new ItemPanel(itemPanelFrame));
+        itemPanelFrame.add(new ItemPanel(location,itemPanelFrame));
         itemPanelFrame.setLocationRelativeTo(null); //center the frame
         itemPanelFrame.setVisible(true);
 
@@ -185,13 +207,36 @@ public class UpdateQuantity extends javax.swing.JPanel {
             //close the main window or exit the application
             Window window = SwingUtilities.getWindowAncestor(this);
             window.dispose(); //closes
+            System.exit(0);
         }
     }//GEN-LAST:event_exitActionPerformed
 
     private void updateQuantityConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateQuantityConfirmActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_updateQuantityConfirmActionPerformed
+        if (isValidInput()) {
+            String itemName = (String) updateQuantityItem.getSelectedItem();
+            ItemInterface it = new ItemManagement();
+            Items item = it.itemLoad(itemName, location);
+            
+            
+            boolean updated = it.updateQuantity(item, (Integer.parseInt(updateQuantityBox.getText())));
 
+            if (updated) {
+                JOptionPane.showMessageDialog(this, "Item transfered successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Failed to transfer item.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            }else{
+              JOptionPane.showMessageDialog(this, "Invalid input, try again", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        
+    }//GEN-LAST:event_updateQuantityConfirmActionPerformed
+                                                  
+
+    private boolean isValidInput() {
+        return !updateQuantityBox.getText().isEmpty();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exit;

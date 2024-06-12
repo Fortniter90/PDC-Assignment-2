@@ -87,11 +87,6 @@ public class DisplayTransfers extends javax.swing.JPanel {
         exit = new javax.swing.JButton();
         displayItemBack = new javax.swing.JButton();
 
-        transfersList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(transfersList);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -155,6 +150,7 @@ public class DisplayTransfers extends javax.swing.JPanel {
             //close the main window or exit the application
             Window window = SwingUtilities.getWindowAncestor(this);
             window.dispose(); //closes
+            System.exit(0);
         }
     }//GEN-LAST:event_exitActionPerformed
 
@@ -169,7 +165,6 @@ public class DisplayTransfers extends javax.swing.JPanel {
         itemPanelFrame.setVisible(true);
 
         parentFrame.dispose(); //close panel
-        System.exit(0);
     }//GEN-LAST:event_displayItemBackActionPerformed
 
 

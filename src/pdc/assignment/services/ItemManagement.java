@@ -188,18 +188,19 @@ public class ItemManagement extends BaseLog implements ItemInterface {
     }
 
     @Override
-    public List<Items> searchItemByQuantity(int quantity) {
+    public List<Items> searchItemByQuantity(int quantity, Locations location) {
 Session session = HibernateUtil.getSession();
         Transaction transaction = null;
         List<Items> items = null;
         try {
             transaction = session.beginTransaction();
-            Query query = session.createQuery("FROM Items where quantity=:quantity");
+            Query query = session.createQuery("FROM Items where location.id=:location and quantity=:quantity");
+            query.setParameter("location", location.getId());
             query.setParameter("quantity", quantity);
             items = query.list();
             if(!items.isEmpty()){
             for (Items item : items) {
-                Locations location = item.getLocation();
+                Locations locations = item.getLocation();
                 System.out.println(item.toString() + ", Location: " + location.getName());
 
             }
@@ -211,35 +212,6 @@ Session session = HibernateUtil.getSession();
                 transaction.rollback();
             }
             logger.info("ERROR Occurs in ItemManagement - searchItemByQuantity!");
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public List<Items> searchItemByCategory(String category) {
-        Session session = HibernateUtil.getSession();
-        Transaction transaction = null;
-        List<Items> items = null;
-        try {
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("FROM Items where category=:category");
-            query.setParameter("category", category);
-            items = query.list();
-            if(!items.isEmpty()){
-            for (Items item : items) {
-                Locations location = item.getLocation();
-                System.out.println(item.toString() + ", Location: " + location.getName());
-
-            }
-            transaction.commit();
-            return items;
-            }
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            logger.info("ERROR Occurs in ItemManagement - searchItemByCategory!");
             e.printStackTrace();
         }
         return null;

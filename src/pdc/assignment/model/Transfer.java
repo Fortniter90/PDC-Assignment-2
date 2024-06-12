@@ -121,6 +121,6 @@ public class Transfer implements Serializable {
     
     @Override
     public String toString(){
-        return "Transfered Item: " + getItem() + "Source Location: " + getSourceLocation() + "Destination Location: " + getDestLocation() + "Amount Transfered: " + getQuantity();
+        return "Transfered Item: " + getItem() + "Source Location: " + getSourceLocation().getName() + "Destination Location: " + getDestLocation().getName() + "Amount Transfered: " + getQuantity();
     }
 }

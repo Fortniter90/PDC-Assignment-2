@@ -103,8 +103,6 @@ public class TransferItem extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Select a location to transfer to:");
 
-        transferLocationDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         transferItemBack.setText("Go back");
         transferItemBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,7 +221,7 @@ public class TransferItem extends javax.swing.JPanel {
             if(!destLocation.equals(location)){
             ItemInterface it = new ItemManagement();
             Items transferItem = it.itemLoad(itemName, location);
-            TransferInterface Ti = new TransferManagement();
+            TransferInterface ti = new TransferManagement();
             Transfer tran = new Transfer();
             tran.setQuantity(Integer.parseInt(transferQuantity.getText()));
             if(transferItem.getQuantity()-tran.getQuantity() >= 0){
@@ -231,7 +229,7 @@ public class TransferItem extends javax.swing.JPanel {
             tran.setItem(transferItem);
             tran.setDestLocation(destLocation);
 
-            boolean transfered = Ti.transferItem(tran);
+            boolean transfered = ti.transferItem(tran);
 
             if (transfered) {
                 JOptionPane.showMessageDialog(this, "Item transfered successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);

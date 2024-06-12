@@ -89,11 +89,6 @@ public class DisplayItems extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         exit = new javax.swing.JButton();
 
-        itemList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(itemList);
 
         displayItemBack.setText("Go back");

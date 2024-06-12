@@ -33,7 +33,7 @@ public class LocationPanel extends javax.swing.JPanel {
         setLocationList();
     }
     
-    private static Locations locationToItem = null;
+    private static Locations locationToItem;
 
     public List<String> locationsToStrings(List<Locations> locations) {
         List<String> strings = new ArrayList<>();
@@ -246,23 +246,6 @@ public class LocationPanel extends javax.swing.JPanel {
         LocationInterface loc = new LocationManagement();
         locationToItem = loc.loadLocation(selectedLocation);
     }//GEN-LAST:event_locationlistMouseClicked
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Location Panel");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //set the preffered size of window
-        frame.setPreferredSize(new Dimension(850, 690));
-
-        //set minimum size of window
-        frame.setMinimumSize(new Dimension(850, 690));
-
-        frame.getContentPane().add(new LocationPanel(frame));
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addLocation;
