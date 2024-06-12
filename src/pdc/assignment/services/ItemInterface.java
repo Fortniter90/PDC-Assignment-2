@@ -25,11 +25,11 @@ public interface ItemInterface {
     
     public boolean updateQuantity(Items item, int amount);
     
-    public List<Items> searchItemByName(String name);
+    public List<Items> searchItemByName(String name, Locations location);
     
     public List<Items> searchItemByQuantity(int quantity, Locations location);
        
-    public List<Items> searchItemByPrice(double price);
+    public List<Items> searchItemByPrice(double price, Locations location);
     
     public Items itemTransferLoad(Session session, String item, Locations destLocation);
     

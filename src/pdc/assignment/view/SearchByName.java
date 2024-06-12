@@ -25,14 +25,12 @@ public class SearchByName extends javax.swing.JPanel {
     
     private final Locations location;
     private JFrame parentFrame;
-    private final Locations location;
     /**
      * Creates new form SearchByName
      */
     public SearchByName(Locations location,JFrame parentFrame) {
         this.location = location;
         this.parentFrame = parentFrame;
-        this.location = location;
         initComponents();
         
         loadItemsIntoList();
@@ -190,7 +188,7 @@ public class SearchByName extends javax.swing.JPanel {
         String name = searchByNameInput.getText().trim();
         if (!name.isEmpty()) {
             ItemManagement itemManagement = new ItemManagement();
-            List<Items> items = itemManagement.searchItemByName(name);
+            List<Items> items = itemManagement.searchItemByName(name,location);
             if (items != null && !items.isEmpty()) {
                 DefaultListModel<String> listModel = new DefaultListModel<>();
                 for (Items item : items) {
