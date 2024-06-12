@@ -5,10 +5,17 @@
 package pdc.assignment.view;
 
 import java.awt.Dimension;
+import java.awt.Window;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
+import pdc.assignment.model.Items;
+import pdc.assignment.services.ItemManagement;
 /**
  *
  * @author klinsmann
@@ -24,7 +31,6 @@ public class SearchByQuantity extends javax.swing.JPanel {
         initComponents();
                         
         parentFrame.setMinimumSize(new Dimension(850, 690));
-        // Add a ComponentListener to limit resizing
         parentFrame.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -36,6 +42,21 @@ public class SearchByQuantity extends javax.swing.JPanel {
             }
         });
     }
+    
+    private void loadItemsIntoList(int quantity) {
+        ItemManagement itemManagement = new ItemManagement();
+        List<Items> items = itemManagement.searchItemByQuantity(quantity);
+        if (items != null && !items.isEmpty()) {
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            for (Items item : items) {
+                listModel.addElement(item.toString() + " - Location: " + item.getLocation().getName());
+            }
+            searchByQuantityList.setModel(listModel);
+        } else {
+            JOptionPane.showMessageDialog(this, "No items found for the given quantity.", "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,6 +102,11 @@ public class SearchByQuantity extends javax.swing.JPanel {
 
         searchByQuantitySearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchByQuantitySearch.setText("Search");
+        searchByQuantitySearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchByQuantitySearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -153,6 +179,16 @@ public class SearchByQuantity extends javax.swing.JPanel {
             window.dispose(); //closes
         }
     }//GEN-LAST:event_exitActionPerformed
+
+    private void searchByQuantitySearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByQuantitySearchActionPerformed
+        // TODO add your handling code here:
+        try {
+            int quantity = Integer.parseInt(searchByQuantityInput.getText().trim());
+            loadItemsIntoList(quantity);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid quantity.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_searchByQuantitySearchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

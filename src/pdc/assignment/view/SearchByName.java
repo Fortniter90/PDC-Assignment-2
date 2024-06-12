@@ -8,10 +8,14 @@ import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import pdc.assignment.services.ItemManagement;
+import pdc.assignment.model.Items;
 /**
  *
  * @author klinsmann
@@ -25,9 +29,10 @@ public class SearchByName extends javax.swing.JPanel {
     public SearchByName(JFrame parentFrame) {
         this.parentFrame = parentFrame;
         initComponents();
-                        
+        
+        loadItemsIntoList();
+        
         parentFrame.setMinimumSize(new Dimension(850, 690));
-        // Add a ComponentListener to limit resizing
         parentFrame.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -40,6 +45,20 @@ public class SearchByName extends javax.swing.JPanel {
         });
     }
 
+    private void loadItemsIntoList() {
+        ItemManagement itemManagement = new ItemManagement();
+        List<Items> items = itemManagement.browseItems();
+        if (items != null && !items.isEmpty()) {
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            for (Items item : items) {
+                listModel.addElement(item.toString() + " - Location: " + item.getLocation().getName());
+            }
+            searchByNameList.setModel(listModel);
+        } else {
+            JOptionPane.showMessageDialog(this, "No items found.", "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -170,8 +189,25 @@ public class SearchByName extends javax.swing.JPanel {
 
     private void searchByNameSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByNameSearchActionPerformed
         // TODO add your handling code here:
+        String name = searchByNameInput.getText().trim();
+        if (!name.isEmpty()) {
+            ItemManagement itemManagement = new ItemManagement();
+            List<Items> items = itemManagement.searchItemByName(name);
+            if (items != null && !items.isEmpty()) {
+                DefaultListModel<String> listModel = new DefaultListModel<>();
+                for (Items item : items) {
+                    listModel.addElement(item.toString() + " - Location: " + item.getLocation().getName());
+                }
+                searchByNameList.setModel(listModel);
+            } else {
+                JOptionPane.showMessageDialog(this, "No items found for the given name.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please enter a name to search.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_searchByNameSearchActionPerformed
 
+    
     private void searchByNameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByNameInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchByNameInputActionPerformed

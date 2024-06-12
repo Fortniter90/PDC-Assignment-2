@@ -5,9 +5,17 @@
 package pdc.assignment.view;
 
 import java.awt.Dimension;
+import java.awt.Window;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+
+import pdc.assignment.model.Items;
+import pdc.assignment.services.ItemManagement;
 
 /**
  *
@@ -35,6 +43,20 @@ public class SearchByPrice extends javax.swing.JPanel {
                 }
             }
         });
+    }
+    
+    private void loadItemsByPrice(double price) {
+        ItemManagement itemManagement = new ItemManagement();
+        List<Items> items = itemManagement.searchItemByPrice(price);
+        if (items != null && !items.isEmpty()) {
+            DefaultListModel<String> listModel = new DefaultListModel<>();
+            for (Items item : items) {
+                listModel.addElement(item.toString() + " - Location: " + item.getLocation().getName());
+            }
+            searchByPriceList.setModel(listModel);
+        } else {
+            JOptionPane.showMessageDialog(this, "No items found for the given price.", "Info", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     /**
@@ -81,6 +103,11 @@ public class SearchByPrice extends javax.swing.JPanel {
 
         searchByPriceSearch.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         searchByPriceSearch.setText("Search");
+        searchByPriceSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchByPriceSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -153,6 +180,16 @@ public class SearchByPrice extends javax.swing.JPanel {
             window.dispose(); //closes
         }
     }//GEN-LAST:event_exitActionPerformed
+
+    private void searchByPriceSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByPriceSearchActionPerformed
+        // TODO add your handling code here:
+        try {
+            double price = Double.parseDouble(searchByPriceInput.getText().trim());
+            loadItemsByPrice(price);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid price.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_searchByPriceSearchActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
