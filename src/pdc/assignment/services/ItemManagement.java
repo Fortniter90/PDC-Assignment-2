@@ -303,15 +303,16 @@ Session session = HibernateUtil.getSession();
     }
 
     @Override
-    public Items itemLoad(String item) {
+    public Items itemLoad(String item, Locations location) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = null;
         Items itemName = null;
         try {
             transaction = session.beginTransaction();
-            String hql = "FROM Items WHERE name = :itemName";
+            String hql = "FROM Items where location=:location and name=:name";
             Query query = session.createQuery(hql);
-            query.setParameter("itemName", item);
+            query.setParameter("name", item);
+            query.setParameter("location", location);
             List<Items> itemsList = query.list();
             if (!itemsList.isEmpty()) {
                 itemName = itemsList.get(0);
@@ -321,6 +322,44 @@ Session session = HibernateUtil.getSession();
             if (transaction != null) {
                 transaction.rollback();
             }
+            logger.info("ERROR Occurs in ItemManagement - itemLoad!");
+            e.printStackTrace();
+        }
+        return itemName;
+    }
+
+    @Override
+    public boolean transferAddItem(Session session, Items item) {
+        boolean status = false;
+        try {
+            Query query = session.createQuery("FROM Items where location=:location and name=:name");
+            query.setParameter("name", item.getName());
+            query.setParameter("location", item.getLocation());
+
+            if (query.uniqueResult() == null) {
+                session.save(item);
+                status = true;
+            }
+            } catch (Exception e) {
+            logger.info("ERROR Occurs in ItemManagement - transferAddItem!");
+            e.printStackTrace();
+        }
+        return status;
+    }
+
+    @Override
+    public Items itemTransferLoad(Session session, String item, Locations destLocation) {
+        Items itemName = null;
+        try {
+            String hql = "FROM Items where location=:location and name=:name";
+            Query query = session.createQuery(hql);
+            query.setParameter("name", item);
+            query.setParameter("location", destLocation);
+            List<Items> itemsList = query.list();
+            if (!itemsList.isEmpty()) {
+                itemName = itemsList.get(0);
+            }
+        } catch (Exception e) {
             logger.info("ERROR Occurs in ItemManagement - itemLoad!");
             e.printStackTrace();
         }
