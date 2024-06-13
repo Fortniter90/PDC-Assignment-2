@@ -18,6 +18,7 @@ import pdc.assignment.services.ItemManagement;
 import pdc.assignment.model.Items;
 import pdc.assignment.model.Locations;
 import pdc.assignment.pkg2.HibernateUtil;
+import pdc.assignment.services.ItemInterface;
 /**
  *
  * @author klinsmann
@@ -33,9 +34,7 @@ public class SearchByName extends javax.swing.JPanel {
         this.location = location;
         this.parentFrame = parentFrame;
         initComponents();
-        
-        loadItemsIntoList();
-        
+                
         parentFrame.setMinimumSize(new Dimension(850, 690));
         parentFrame.addComponentListener(new ComponentAdapter() {
             @Override
@@ -50,9 +49,9 @@ public class SearchByName extends javax.swing.JPanel {
     }
     
     //Loads items and populates the searchByName panel
-    private void loadItemsIntoList() {
-        ItemManagement itemManagement = new ItemManagement();
-        List<Items> items = itemManagement.browseItems();
+    private void loadItemsByName(String name) {
+        ItemInterface itemManagement = new ItemManagement();
+        List<Items> items = itemManagement.searchItemByName(name,location);
         if (items != null && !items.isEmpty()) {
             DefaultListModel<String> listModel = new DefaultListModel<>();
             for (Items item : items) {
@@ -189,21 +188,11 @@ public class SearchByName extends javax.swing.JPanel {
 
     private void searchByNameSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByNameSearchActionPerformed
         // TODO add your handling code here:
-        String name = searchByNameInput.getText().trim();
-        if (!name.isEmpty()) {
-            ItemManagement itemManagement = new ItemManagement();
-            List<Items> items = itemManagement.searchItemByName(name,location);
-            if (items != null && !items.isEmpty()) {
-                DefaultListModel<String> listModel = new DefaultListModel<>();
-                for (Items item : items) {
-                    listModel.addElement(item.toString() + " - Location: " + item.getLocation().getName());
-                }
-                searchByNameList.setModel(listModel);
-            } else {
-                JOptionPane.showMessageDialog(this, "No items found for the given name.", "Info", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Please enter a name to search.", "Error", JOptionPane.ERROR_MESSAGE);
+        try {
+            String name = searchByNameInput.getText().trim();
+            loadItemsByName(name);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid Name.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_searchByNameSearchActionPerformed
 

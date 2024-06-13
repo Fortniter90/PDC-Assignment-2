@@ -17,6 +17,7 @@ import javax.swing.SwingUtilities;
 import pdc.assignment.model.Items;
 import pdc.assignment.model.Locations;
 import pdc.assignment.pkg2.HibernateUtil;
+import pdc.assignment.services.ItemInterface;
 import pdc.assignment.services.ItemManagement;
 
 /**
@@ -50,8 +51,8 @@ public class SearchByPrice extends javax.swing.JPanel {
    
     //Loads items and populates the searchByPrice panel
     private void loadItemsByPrice(double price) {
-        ItemManagement itemManagement = new ItemManagement();
-        List<Items> items = itemManagement.searchItemByPrice(price,location);
+            ItemInterface itemManagement = new ItemManagement();
+    List<Items> items = itemManagement.searchItemByPrice(price,location);
         if (items != null && !items.isEmpty()) {
             DefaultListModel<String> listModel = new DefaultListModel<>();
             for (Items item : items) {

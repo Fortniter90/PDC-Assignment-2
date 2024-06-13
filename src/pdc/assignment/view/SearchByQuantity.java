@@ -17,6 +17,7 @@ import javax.swing.SwingUtilities;
 import pdc.assignment.model.Items;
 import pdc.assignment.model.Locations;
 import pdc.assignment.pkg2.HibernateUtil;
+import pdc.assignment.services.ItemInterface;
 import pdc.assignment.services.ItemManagement;
 /**
  *
@@ -47,7 +48,7 @@ public class SearchByQuantity extends javax.swing.JPanel {
     }
     //Loads items and populates the searchByQuantity panel
     private void loadItemsIntoList(int quantity) {
-        ItemManagement itemManagement = new ItemManagement();
+        ItemInterface itemManagement = new ItemManagement();
         List<Items> items = itemManagement.searchItemByQuantity(quantity,location);
         if (items != null && !items.isEmpty()) {
             DefaultListModel<String> listModel = new DefaultListModel<>();
