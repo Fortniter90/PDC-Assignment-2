@@ -219,34 +219,38 @@ public class TransferItem extends javax.swing.JPanel {
             String loadLocation = (String) transferLocationDropdown.getSelectedItem();
             LocationInterface loc = new LocationManagement();
             Locations destLocation = loc.loadLocation(loadLocation);
-            if(!destLocation.equals(location)){
-            ItemInterface it = new ItemManagement();
-            Items transferItem = it.itemLoad(itemName, location);
-            TransferInterface ti = new TransferManagement();
-            Transfer tran = new Transfer();
-            tran.setQuantity(Integer.parseInt(transferQuantity.getText()));
-            if(transferItem.getQuantity()-tran.getQuantity() >= 0){
-            tran.setSourceLocation(location);
-            tran.setItem(transferItem);
-            tran.setDestLocation(destLocation);
 
-            boolean transfered = ti.transferItem(tran);
+            if (!destLocation.equals(location)) {
+                ItemInterface it = new ItemManagement();
+                Items transferItem = it.itemLoad(itemName, location);
+                TransferInterface ti = new TransferManagement();
+                Transfer tran = new Transfer();
+                try {
+                    tran.setQuantity(Integer.parseInt(transferQuantity.getText()));
+                    if (transferItem.getQuantity() - tran.getQuantity() >= 0) {
+                        tran.setSourceLocation(location);
+                        tran.setItem(transferItem);
+                        tran.setDestLocation(destLocation);
 
-            if (transfered) {
-                JOptionPane.showMessageDialog(this, "Item transfered successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        boolean transferred = ti.transferItem(tran);
+
+                        if (transferred) {
+                            JOptionPane.showMessageDialog(this, "Item transferred successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Failed to transfer item.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Invalid input: Not enough quantity to transfer.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(this, "Invalid input: Quantity must be a valid integer.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "Failed to transfer item.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            }else{
-              JOptionPane.showMessageDialog(this, "Invalid input, make sure there is enough of this item to transfer", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            }else{
-              JOptionPane.showMessageDialog(this, "Invalid input, can't transfer to the location you are already in", "Error", JOptionPane.ERROR_MESSAGE);                
+                JOptionPane.showMessageDialog(this, "Invalid input: Cannot transfer to the location you are already in.", "Error", JOptionPane.ERROR_MESSAGE);                
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Invalid input, try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Invalid input: Please check your inputs and try again.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_confirmTransferItemActionPerformed
 
     private boolean isValidInput() {

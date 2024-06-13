@@ -176,22 +176,32 @@ public class AddItems extends javax.swing.JPanel {
         // TODO add your handling code here:
         //if input valid
         if (isValidInput()) {
-            //create an items object with the input values
-            Items newItem = new Items();
-            newItem.setLocation(location);
-            newItem.setName(addItemName.getText());
-            newItem.setQuantity(Integer.parseInt(addItemQuantity.getText())); //assuming quantity is an integer
-            newItem .setPrice(Double.parseDouble(addItemPrice.getText())); //assuming price is a double
+            try {
+                // Create an Items object with the input values
+                Items newItem = new Items();
+                newItem.setLocation(location);
+                newItem.setName(addItemName.getText());
 
-            ItemManagement itemManagement = new ItemManagement(); //adjust this as per your class structure
+                // Convert quantity and price strings to numeric values
+                int quantity = Integer.parseInt(addItemQuantity.getText());
+                double price = Double.parseDouble(addItemPrice.getText());
 
-            // Call the addItem method from ItemManagement
-            boolean added = itemManagement.addItem(newItem);
+                newItem.setQuantity(quantity);
+                newItem.setPrice(price);
 
-            if (added) {
-                JOptionPane.showMessageDialog(this, "Item added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to add item.", "Error", JOptionPane.ERROR_MESSAGE);
+                ItemManagement itemManagement = new ItemManagement(); // Adjust this as per your class structure
+
+                // Call the addItem method from ItemManagement
+                boolean added = itemManagement.addItem(newItem);
+
+                if (added) {
+                    JOptionPane.showMessageDialog(this, "Item added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to add item.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (NumberFormatException ex) {
+                // Handle the case where quantity or price is not a valid number
+                JOptionPane.showMessageDialog(this, "Invalid quantity or price. Please enter numeric values.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Invalid input, try again.", "Error", JOptionPane.ERROR_MESSAGE);
