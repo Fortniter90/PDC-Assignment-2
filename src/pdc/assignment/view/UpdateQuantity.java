@@ -216,20 +216,29 @@ public class UpdateQuantity extends javax.swing.JPanel {
     private void updateQuantityConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateQuantityConfirmActionPerformed
         // TODO add your handling code here:
         if (isValidInput()) {
-            String itemName = (String) updateQuantityItem.getSelectedItem();
-            ItemInterface it = new ItemManagement();
-            Items item = it.itemLoad(itemName, location);
-            
-            boolean updated = it.updateQuantity(item, (Integer.parseInt(updateQuantityBox.getText())));
+            try {
+                String itemName = (String) updateQuantityItem.getSelectedItem();
+                ItemInterface it = new ItemManagement();
+                Items item = it.itemLoad(itemName, location);
 
-            if (updated) {
-                JOptionPane.showMessageDialog(this, "Item updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to updated item.", "Error", JOptionPane.ERROR_MESSAGE);
+                // Convert quantity input to integer
+                int newQuantity = Integer.parseInt(updateQuantityBox.getText());
+
+                boolean updated = it.updateQuantity(item, newQuantity);
+
+                if (updated) {
+                    JOptionPane.showMessageDialog(this, "Item updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to update item.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (NumberFormatException ex) {
+                // Handle the case where quantity input is not a valid integer
+                JOptionPane.showMessageDialog(this, "Invalid quantity input. Please enter a valid integer.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            }else{
-              JOptionPane.showMessageDialog(this, "Invalid input, try again", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid input, try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_updateQuantityConfirmActionPerformed
                                                   
 
