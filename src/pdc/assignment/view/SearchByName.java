@@ -158,7 +158,6 @@ public class SearchByName extends javax.swing.JPanel {
 
     private void searchByNameBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByNameBackActionPerformed
         // TODO add your handling code here:
-
         JFrame itemPanelFrame = new JFrame("Item Panel");
         itemPanelFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         itemPanelFrame.setSize(850, 690);

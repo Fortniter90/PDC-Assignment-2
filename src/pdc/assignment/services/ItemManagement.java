@@ -193,6 +193,7 @@ public class ItemManagement extends BaseLog implements ItemInterface {
             logger.info("ERROR Occurs in ItemManagement - searchItemByName!");
             e.printStackTrace();
         }
+        session.close();
         return null;
     }
 
