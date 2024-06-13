@@ -216,6 +216,7 @@ public class TransferItem extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (isValidInput()) {
             String itemName = (String) transferItemDropdown.getSelectedItem();
+            if(itemName != null){
             String loadLocation = (String) transferLocationDropdown.getSelectedItem();
             LocationInterface loc = new LocationManagement();
             Locations destLocation = loc.loadLocation(loadLocation);
@@ -248,6 +249,9 @@ public class TransferItem extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid input: Cannot transfer to the location you are already in.", "Error", JOptionPane.ERROR_MESSAGE);                
             }
+            }else{
+                JOptionPane.showMessageDialog(this, "Invalid input: Please pick an item to transfer", "Error", JOptionPane.ERROR_MESSAGE);                                
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Invalid input: Please check your inputs and try again.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -255,7 +259,7 @@ public class TransferItem extends javax.swing.JPanel {
 
     private boolean isValidInput() {
         return !transferQuantity.getText().isEmpty();
-    }
+                }
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
